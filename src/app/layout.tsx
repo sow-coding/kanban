@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
 import '../styles/global.css'
 
+
 const kanbanFont = Plus_Jakarta_Sans ({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
