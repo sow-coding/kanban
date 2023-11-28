@@ -1,3 +1,3 @@
-import {createContext} from "react"
+import { createContext, Dispatch, SetStateAction } from "react"
 
-export const BoardsContext = createContext<any[]>([])
+export const BoardsContext = createContext<[any[], Dispatch<SetStateAction<boolean>>] | any[]>([])

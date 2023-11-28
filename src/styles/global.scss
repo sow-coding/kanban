@@ -1,8 +1,12 @@
 @import "../components/navbar/navbar.module.css";
 @import "../components/boardStick/boardStick.module.css";
+@import "../components/addBoard/addBoard.module.css";
 
 * {
     box-sizing: border-box;
+    &:focus {
+        outline: none;
+    }
 }
 
 :root {

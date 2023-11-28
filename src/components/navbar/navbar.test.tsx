@@ -10,7 +10,7 @@ describe("navbar", () => {
         const element = screen.getByTestId("navbar")
         expect(element).toBeInTheDocument()
     })
-    /*it("should change the app mode when i click on the button for", async () => {
+    it("should change the app mode when i click on the button for", async () => {
        user.setup()
        render(<Board />)
        const button = screen.getByTestId("changeModeBtn");
@@ -19,5 +19,5 @@ describe("navbar", () => {
        expect(board).toHaveAttribute('data-theme', "dark")
        await user.click(button)
        expect(board).toHaveAttribute("data-theme", "light")
-    })*/
+    })
 })

@@ -5,16 +5,18 @@ import { ThemeContext } from '@/context/ThemeContext'
 import Switch from '@mui/material/Switch';
 import BoardStick from '../boardStick/boardStick';
 import { BoardsContext } from '@/context/BoardsContext';
+import { AddBoardContext } from '@/context/AddBoardContext';
 
 function Navbar() {
 
   const [theme, setTheme] = useContext(ThemeContext)
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
-  const [boards, setBoards] = useContext(BoardsContext)
+  const [boards, setBoards] = useContext(BoardsContext);
+  const [addBoard, setAddBoard] = useContext(AddBoardContext)
 
-  interface boardsParams {
-    board: any,
+  const addNewBoard = () => {
+    setBoards((prevBoards: any) => [...(prevBoards || []), "board"]);
   }
 
   return (
@@ -28,16 +30,17 @@ function Navbar() {
             <path fillRule="evenodd" clipRule="evenodd" d="M33.8154 23.4342C32.2491 20.7764 29.328 19 26 19C22.6706 19 19.7501 20.7776 18.1846 23.4342C17.9385 23.8519 17.9385 24.3703 18.1846 24.788C19.7509 27.4458 22.6719 29.2222 26 29.2222C29.3294 29.2222 32.2499 27.4446 33.8154 24.788C34.0615 24.3703 34.0615 23.8519 33.8154 23.4342ZM26 27.8889C23.9122 27.8889 22.2222 26.1992 22.2222 24.1111C22.2222 22.0233 23.9118 20.3333 26 20.3333C28.0878 20.3333 29.7778 22.0229 29.7778 24.1111C29.7778 26.1989 28.0882 27.8889 26 27.8889ZM26 27C27.5955 27 28.8889 25.7066 28.8889 24.1111C28.8889 22.5156 27.5955 21.2222 26 21.2222C25.5081 21.2222 25.045 21.3453 24.6396 21.5621L24.6405 21.5621C25.2975 21.5621 25.8301 22.0947 25.8301 22.7516C25.8301 23.4086 25.2975 23.9412 24.6405 23.9412C23.9836 23.9412 23.451 23.4086 23.451 22.7516L23.451 22.7507C23.2342 23.1561 23.1111 23.6192 23.1111 24.1111C23.1111 25.7066 24.4045 27 26 27Z" fill="white"/>
           </svg> :
           <>
-          <div className="navbarMenu">
+        <div className="navbarMenu">
           <Logo />
             <div className="navbarMenuBoard">
             <p className='allBoard'>ALL BOARDS ( k )</p>
-            {boards.map((board:boardsParams, index:number) => (
+            {boards?.map((board:any, index:number) => (
               <BoardStick key={index}/>
             ))}
             </div>
-            <div className="navbarMenuAddBoard" onClick={() => {
-              setBoards([...boards, "board"])
+            <div data-testid="navbarMenuBoardAdd" className="navbarMenuAddBoard" onClick={() => {
+              setAddBoard(true)
+              //addNewBoard()
             }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path fillRule="evenodd" clipRule="evenodd" d="M0.846133 0.846133C0.304363 1.3879 0 2.12271 0 2.88889V13.1111C0 13.8773 0.304363 14.6121 0.846133 15.1538C1.3879 15.6957 2.12271 16 2.88889 16H13.1111C13.8773 16 14.6121 15.6957 15.1538 15.1538C15.6957 14.6121 16 13.8773 16 13.1111V2.88889C16 2.12271 15.6957 1.3879 15.1538 0.846133C14.6121 0.304363 13.8773 0 13.1111 0H2.88889C2.12271 0 1.3879 0.304363 0.846133 0.846133ZM1.33333 13.1111V8.44448H9.77781V14.6667H2.88889C2.03022 14.6667 1.33333 13.9698 1.33333 13.1111ZM9.77781 7.11111V1.33333H2.88889C2.47633 1.33333 2.08067 1.49723 1.78895 1.78895C1.49723 2.08067 1.33333 2.47633 1.33333 2.88889V7.11111H9.77781ZM11.1111 5.77778H14.6667V10.2222H11.1111V5.77778ZM14.6667 11.5555H11.1111V14.6667H13.1111C13.5236 14.6667 13.9194 14.5028 14.2111 14.2111C14.5028 13.9194 14.6667 13.5236 14.6667 13.1111V11.5555ZM14.6667 2.88889V4.44445H11.1111V1.33333H13.1111C13.5236 1.33333 13.9194 1.49723 14.2111 1.78895C14.5028 2.08067 14.6667 2.47633 14.6667 2.88889Z" fill="#635FC7"/>
@@ -47,9 +50,9 @@ function Navbar() {
         </div>
         <div className="navbarBottom">
           <div className="appMode">
-            <Switch data-testid="changeModeBtn" {...label} onChange={() => {
+            <Switch data-testid="changeModeBtn" {...label} onClick={() => {
               setTheme(!theme)
-            }}/>
+            }} />
           </div>
           <div className="hideSidebar" onClick={() => {
             setNavbarOff(true)

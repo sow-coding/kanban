@@ -1,0 +1,127 @@
+.calc {
+  position: relative;
+  z-index: 1; /* Ensure the board is above other components */
+}
+.calc::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3); /* Adjust the alpha value as needed for transparency */
+  z-index: -1; /* Place the shadow behind the board */
+  pointer-events: none; /* Allows interactions with elements beneath the shadow */
+}
+
+.addBoard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: white;
+  border-radius: 6px;
+  padding: 32px 32px;
+  width: 35%;
+}
+.addBoard h1 {
+  color: var(--p-color);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.addBoard .boardName {
+  display: flex;
+  flex-direction: column;
+}
+.addBoard .boardName label {
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 7px;
+}
+.addBoard .boardName input {
+  border-radius: 4px;
+  border: 2px solid rgba(130, 143, 163, 0.25);
+  padding: 12px 16px;
+}
+.addBoard .columnsBoard {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.addBoard .columnsBoard label {
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 7px;
+}
+.addBoard .columnsBoard .columnBoard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addBoard .columnsBoard .columnBoard input {
+  border-radius: 4px;
+  border: 2px solid rgba(130, 143, 163, 0.25);
+  padding: 12px 16px;
+  width: 90%;
+}
+.addBoard .columnsBoard .columnBoard svg:hover {
+  cursor: pointer;
+}
+.addBoard .addNewColumn {
+  border-radius: 20px;
+  background: rgba(99, 95, 199, 0.1);
+  padding: 12px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0 0;
+}
+.addBoard .addNewColumn:hover {
+  cursor: pointer;
+}
+.addBoard .addNewColumn p {
+  color: #635FC7;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23px; /* 176.923% */
+  margin: 0 0;
+}
+.addBoard .createNewBoard {
+  border-radius: 20px;
+  background: #635FC7;
+  padding: 12px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0 0;
+}
+.addBoard .createNewBoard:hover {
+  cursor: pointer;
+}
+.addBoard .createNewBoard p {
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23px; /* 176.923% */
+  margin: 0 0;
+}/*# sourceMappingURL=addBoard.module.css.map */
