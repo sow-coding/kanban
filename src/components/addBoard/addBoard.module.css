@@ -20,7 +20,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: white;
+  background-color: var(--bg-color);
   border-radius: 6px;
   padding: 32px 32px;
   width: 35%;
@@ -48,8 +48,10 @@
 }
 .addBoard .boardName input {
   border-radius: 4px;
-  border: 2px solid rgba(130, 143, 163, 0.25);
+  border: 1.5px solid rgba(130, 143, 163, 0.25);
   padding: 12px 16px;
+  background-color: var(--bg-color);
+  color: var(--p-color);
 }
 .addBoard .columnsBoard {
   display: flex;
@@ -69,12 +71,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 5px 0;
 }
 .addBoard .columnsBoard .columnBoard input {
   border-radius: 4px;
-  border: 2px solid rgba(130, 143, 163, 0.25);
+  border: 1.5px solid rgba(130, 143, 163, 0.25);
   padding: 12px 16px;
   width: 90%;
+  background-color: var(--bg-color);
+  color: var(--p-color);
 }
 .addBoard .columnsBoard .columnBoard svg:hover {
   cursor: pointer;
@@ -124,4 +129,75 @@
   font-weight: 700;
   line-height: 23px; /* 176.923% */
   margin: 0 0;
+}
+
+@media (max-width: 3000px) {
+  .addBoard {
+    width: 25%;
+  }
+}
+@media (max-width: 2300px) {
+  .addBoard {
+    width: 30%;
+  }
+}
+@media (max-width: 2000px) {
+  .addBoard {
+    width: 33%;
+  }
+}
+@media (max-width: 1800px) {
+  .addBoard {
+    width: 36%;
+  }
+}
+@media (max-width: 1600px) {
+  .addBoard {
+    width: 38.5%;
+  }
+}
+@media (max-width: 1450px) {
+  .addBoard {
+    width: 42%;
+  }
+}
+@media (max-width: 1300px) {
+  .addBoard {
+    width: 44%;
+  }
+}
+@media (max-width: 1100px) {
+  .addBoard {
+    width: 47%;
+  }
+}
+@media (max-width: 950px) {
+  .addBoard {
+    width: 50%;
+  }
+}
+@media (max-width: 850px) {
+  .addBoard {
+    width: 53%;
+  }
+}
+@media (max-width: 725px) {
+  .addBoard {
+    width: 56%;
+  }
+}
+@media (max-width: 600px) {
+  .addBoard {
+    width: 60%;
+  }
+}
+@media (max-width: 450px) {
+  .addBoard {
+    width: 80%;
+  }
+}
+@media (max-width: 320px) {
+  .addBoard {
+    width: 95%;
+  }
 }/*# sourceMappingURL=addBoard.module.css.map */

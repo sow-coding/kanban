@@ -44,7 +44,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  letter-spacing: 2.4px;
+  letter-spacing: 2px;
   margin: 0 0;
 }
 .navbar .navbarMenu .navbarMenuAddBoard:hover {
@@ -57,6 +57,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  letter-spacing: 0;
 }
 .navbar .navbarMenu .navbarMenuAddBoard svg {
   margin-right: 10px;
@@ -90,4 +91,55 @@
 }
 .navbar .eye:hover {
   cursor: pointer;
+}
+
+@media (max-width: 1800px) {
+  .navbar {
+    width: 23%;
+  }
+}
+@media (max-width: 1600px) {
+  .navbar {
+    width: 26%;
+  }
+}
+@media (max-width: 1400px) {
+  .navbar {
+    width: 30%;
+  }
+}
+@media (max-width: 1320px) {
+  .navbar {
+    width: 34%;
+  }
+}
+@media (max-width: 1150px) {
+  .navbar {
+    width: 38%;
+  }
+}
+@media (max-width: 1000px) {
+  .navbar {
+    width: 42%;
+  }
+}
+@media (max-width: 850px) {
+  .navbar {
+    width: 45%;
+  }
+}
+@media (max-width: 750px) {
+  .navbar {
+    width: 46.5%;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    width: 48%;
+  }
+}
+@media (max-width: 599px) {
+  .navbar {
+    display: none;
+  }
 }/*# sourceMappingURL=navbar.module.css.map */

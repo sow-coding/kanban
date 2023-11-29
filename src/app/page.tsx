@@ -8,8 +8,10 @@ import { AddBoardContext } from "@/context/AddBoardContext";
 export default function Board() {
   
   const [theme, setTheme] = useState<boolean>(false)
-  const [boards, setBoards] = useState<any[]>([])
+  const [boards, setBoards] = useState<object[]>([])
   const [addBoard, setAddBoard] = useState<boolean>(false)
+
+  console.log(boards)
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
