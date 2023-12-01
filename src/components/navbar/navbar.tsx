@@ -33,9 +33,9 @@ function Navbar() {
         <div className="navbarMenu">
           <Logo />
             <div className="navbarMenuBoard">
-            <p className='allBoard'>ALL BOARDS ( {boards.length} )</p>
+            <p className='allBoard'>ALL BOARDS ({boards?.length})</p>
             {boards?.map((board:any, index:number) => (
-              <BoardStick key={index}/>
+              <BoardStick key={index} boardName={boards[index].nameOfTheBoard}/>
             ))}
             </div>
             <div data-testid="navbarMenuBoardAdd" className="navbarMenuAddBoard" onClick={() => {

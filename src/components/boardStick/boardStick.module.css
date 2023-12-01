@@ -4,17 +4,15 @@
 
 .boardStick {
   display: flex;
-  justify-content: center;
   border-radius: 0px 100px 100px 0px;
   align-items: center;
   width: 75%;
   padding: 12px 15px;
   margin: 15px 0;
-  background-color: #635FC7;
 }
 .boardStick p {
   margin-left: 12px;
-  color: var(--p-color);
+  color: #828FA3;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
@@ -22,8 +20,16 @@
   margin: 0 0 0 15px;
 }
 .boardStick svg {
-  margin-left: 0px !important;
+  margin-left: 30px !important;
 }
 .boardStick:hover {
   cursor: pointer;
+}
+
+.onBoardStick {
+  background-color: #635FC7;
+}
+
+.pOnBoardStick {
+  color: white !important;
 }/*# sourceMappingURL=boardStick.module.css.map */
