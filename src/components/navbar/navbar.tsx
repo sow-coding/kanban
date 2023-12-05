@@ -6,12 +6,13 @@ import Switch from '@mui/material/Switch';
 import BoardStick from '../boardStick/boardStick';
 import { BoardsContext } from '@/context/BoardsContext';
 import { AddBoardContext } from '@/context/AddBoardContext';
+import { NavbarContext } from '@/context/NavbarContext';
 
 function Navbar() {
 
   const [theme, setTheme] = useContext(ThemeContext)
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
-  const [navbarOff, setNavbarOff] = useState<boolean>(false)
+  const [navbarOff, setNavbarOff] = useContext(NavbarContext)
   const [boards, setBoards] = useContext(BoardsContext);
   const [addBoard, setAddBoard] = useContext(AddBoardContext)
 
@@ -20,7 +21,7 @@ function Navbar() {
   }
 
   return (
-    <div className={`navbar ${navbarOff && "noPadding"}`} data-testid="navbar">
+    <div className={`navbar ${navbarOff && "noPadding noWidth20"}`} data-testid="navbar">
         {
           navbarOff ? 
           <svg className='eye' onClick={() => {

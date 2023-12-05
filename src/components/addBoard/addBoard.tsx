@@ -1,20 +1,14 @@
 "use client"
-
 import { AddBoardContext } from "@/context/AddBoardContext";
 import { BoardsContext } from "@/context/BoardsContext";
-import { useContext, useState } from "react"
-
-interface Board {
-    nameOfTheBoard: string
-}
+import { useContext, useState, useRef } from "react"
 
 function AddBoard() {
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [addBoard, setAddBoard] = useContext(AddBoardContext)
     const [boards, setBoards] = useContext(BoardsContext)
-    const [board, setBoard] = useState<Board>({
-        nameOfTheBoard: ""
-    })
+    const [nameBoard, setNameBoard] = useState<string>("")
+    const [columnsBoard, setColumnsBoard] = useState<string[]>([])
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
@@ -23,22 +17,26 @@ function AddBoard() {
     };
 
   return (
-    <div className="calc">
-    <div className='addBoard' data-testid="addBoard">
+    <div className="calc" onClick={() => {
+        setAddBoard(false)
+    }}>
+    <div className='addBoard' data-testid="addBoard" onClick={(e) => {
+        e.stopPropagation()
+    }}>
         <h1>Add New Board</h1>
         <div className="boardName">
             <label htmlFor="boardName">Name</label>
             <input type="text" placeholder='e.g. Web Design' onChange={(e) => {
-                setBoard({
-                    nameOfTheBoard: e.currentTarget.value
-                })
+                setNameBoard(e.currentTarget.value)
             }}/>
         </div>
         <div className="columnsBoard">
             <label htmlFor="columsBoard">Columns</label>
             {columns.map((column, index) => (
                 <div className="columnBoard" key={index}>
-                <input type="text" />
+                <input type="text" onBlur={(e) => {
+                    setColumnsBoard([...columnsBoard ,`${e.currentTarget.value}`])
+                }}/>
                 <svg id={`${index}`} onClick={(e) => {
                     deleteColumn(index)
                 }} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -53,7 +51,10 @@ function AddBoard() {
                 <p>+ Add New Column</p>
             </div>
             <div className="createNewBoard" onClick={() => {
-                setBoards([...boards, board])
+                setBoards([...boards, {
+                    nameOfTheBoard: `${nameBoard}`,
+                    columns: columnsBoard
+                }])
                 setAddBoard(false)
             }}>
                 <p>Create New Board</p>

@@ -1,6 +1,7 @@
 @import "../components/navbar/navbar.module.css";
 @import "../components/boardStick/boardStick.module.css";
 @import "../components/addBoard/addBoard.module.css";
+@import "../components/boardNavbar/boardNavbar.module.css";
 * {
   box-sizing: border-box;
 }
@@ -25,4 +26,43 @@ body .board {
   width: 100%;
   height: 100vh;
   background-color: var(--bg-color);
+  display: flex;
+  align-items: start;
+}
+body .board .kanbanApp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+body .board .kanbanApp .empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+body .board .kanbanApp .empty h3 {
+  color: #828FA3;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+body .board .kanbanApp .empty .addNewColumn {
+  border-radius: 24px;
+  background-color: #635FC7;
+  padding: 10px 24px;
+}
+body .board .kanbanApp .empty .addNewColumn:hover {
+  cursor: pointer;
+}
+body .board .kanbanApp .empty .addNewColumn p {
+  color: white;
+  margin: 5px 5px;
+  text-align: center;
 }/*# sourceMappingURL=global.css.map */

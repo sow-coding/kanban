@@ -1,0 +1,48 @@
+.boardNavbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    & .boardNavbarLeft {
+        display: flex;
+        align-items: center;
+        & svg {
+            margin-left: 30px;
+            margin-right: 80px;
+        }
+        & h1 {
+            color: var(--p-color);
+            font-feature-settings: 'clig' off, 'liga' off;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+    & .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 30%;
+        margin-right: 30px;
+        & div {
+            border-radius: 24px;
+            background-color: #635FC7;
+            padding: 10px 24px;
+            margin-right: 30px;
+            &:hover {
+                cursor: pointer;
+            }
+            & p {
+                color: white;
+                margin: 5px 5px;
+            }
+        }
+        & svg {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
