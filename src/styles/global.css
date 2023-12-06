@@ -65,4 +65,20 @@ body .board .kanbanApp .empty .addNewColumn p {
   color: white;
   margin: 5px 5px;
   text-align: center;
+}
+body .board .kanbanApp .columns {
+  width: 100%;
+  height: 100vh;
+  background-color: #635FC7;
+  display: flex;
+  align-items: start;
+}
+body .board .kanbanApp .columns div {
+  width: 30%;
+  height: 100%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=global.css.map */

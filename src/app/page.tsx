@@ -2,7 +2,7 @@
 import Navbar from "@/components/navbar/navbar";
 import { BoardsContext } from "@/context/BoardsContext";
 import { ThemeContext } from "@/context/ThemeContext";
-import { useState } from "react";
+import { useState, SetStateAction } from "react";
 import AddBoard from '@/components/addBoard/addBoard'
 import { AddBoardContext } from "@/context/AddBoardContext";
 import { WhichBoardContext } from "@/context/WhichBoardContext";
@@ -11,19 +11,30 @@ import { NavbarContext } from "@/context/NavbarContext";
 
 export default function Board() {
 
-  const [boards, setBoards] = useState<object[]>([])
+  interface Board {
+    nameOfTheBoard: string;
+    columns?: string[]
+  }
+
+  const [boards, setBoards] = useState<Board[]>([])
   const [theme, setTheme] = useState<boolean>(false)
   const [addBoard, setAddBoard] = useState<boolean>(false)
   const [whichBoard, setWhichBoard] = useState<string>("")
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
+  const [newColumnName, setNewColumnName] = useState<string>("")
 
-  interface Board {
-    nameOfTheBoard?: string;
-    columns?: string[]
-  }
+  
+  const handleNewColumn = (boardIndex:number) => {
 
-//VERIF LE SYSTEME DE ADD TASK, CREER LE TRUC ADD TASK ET VERIF LE SYSTEME EN METTANT UL DAN DIV COLUUM
-//ET EN ADD TASK AVEC LI DANS LA COLUMN SOUHAITE !!
+    const updatedBoards: Board[] = [...boards];
+
+    updatedBoards[boardIndex].columns?.push(newColumnName);
+
+    setBoards(updatedBoards);
+
+    setNewColumnName('');
+  };
+
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
@@ -42,15 +53,15 @@ export default function Board() {
         <div className="addNewColumn">
           <p>+ Add New Column</p>
         </div>
-      </div> : (
-        boards.map((board: Board, index:number) => (
-          <div key={index}>
-            {board.nameOfTheBoard === whichBoard ? board.columns?.map((column:string, index:number) => (
-              <div key={index}>{column}</div>
-            )) : null}
-          </div>
-        ))
-      )}
+      </div> : <div className="columns">
+        {boards.map((board:Board, index:number) => (
+          board.nameOfTheBoard === whichBoard ? board.columns?.map((column:string, index:number) => (
+            <div key={index} className="column">
+              <h6>{column}</h6>
+            </div>
+          )) : null
+        ))}  
+      </div>}
       </div>
       {addBoard && <AddBoard />}
     </div>
