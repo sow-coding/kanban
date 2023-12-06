@@ -54,13 +54,16 @@ export default function Board() {
           <p>+ Add New Column</p>
         </div>
       </div> : <div className="columns">
-        {boards.map((board:Board, index:number) => (
+        {boards.map((board:Board) => (
           board.nameOfTheBoard === whichBoard ? board.columns?.map((column:string, index:number) => (
             <div key={index} className="column">
               <h6>{column}</h6>
             </div>
           )) : null
-        ))}  
+        ))}
+        <div className="newColumn">
+            <h2>+ New Column</h2>
+        </div>  
       </div>}
       </div>
       {addBoard && <AddBoard />}

@@ -69,16 +69,40 @@ body .board .kanbanApp .empty .addNewColumn p {
 body .board .kanbanApp .columns {
   width: 100%;
   height: 100vh;
-  background-color: #635FC7;
   display: flex;
   align-items: start;
 }
-body .board .kanbanApp .columns div {
-  width: 30%;
+body .board .kanbanApp .columns .column {
+  width: 60%;
   height: 100%;
   background-color: aqua;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+body .board .kanbanApp .columns .newColumn {
+  width: 100%;
+  height: 100%;
+  background-color: #E9EFFA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+body .board .kanbanApp .columns .newColumn:hover {
+  cursor: pointer;
+}
+body .board .kanbanApp .columns .newColumn:hover h2 {
+  color: #635FC7;
+}
+body .board .kanbanApp .columns .newColumn h2 {
+  color: #828FA3;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }/*# sourceMappingURL=global.css.map */
