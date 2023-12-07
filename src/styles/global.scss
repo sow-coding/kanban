@@ -2,7 +2,7 @@
 @import "../components/boardStick/boardStick.module.css";
 @import "../components/addBoard/addBoard.module.css";
 @import "../components/boardNavbar/boardNavbar.module.css";
-
+@import "../components/addColumn/addColumn.module.css";
 * {
     box-sizing: border-box;
     &:focus {
@@ -51,6 +51,19 @@ body {
                     line-height: normal;
                 }
                 & .addNewColumn {
+                    border-radius: 24px;
+                    background-color: #635FC7;
+                    padding: 10px 24px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                    & p {
+                        color: white;
+                        margin: 5px 5px;
+                        text-align: center;
+                    }
+                }
+                & .addNewBoard{
                     border-radius: 24px;
                     background-color: #635FC7;
                     padding: 10px 24px;

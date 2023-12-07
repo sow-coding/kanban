@@ -2,6 +2,7 @@
 @import "../components/boardStick/boardStick.module.css";
 @import "../components/addBoard/addBoard.module.css";
 @import "../components/boardNavbar/boardNavbar.module.css";
+@import "../components/addColumn/addColumn.module.css";
 * {
   box-sizing: border-box;
 }
@@ -62,6 +63,19 @@ body .board .kanbanApp .empty .addNewColumn:hover {
   cursor: pointer;
 }
 body .board .kanbanApp .empty .addNewColumn p {
+  color: white;
+  margin: 5px 5px;
+  text-align: center;
+}
+body .board .kanbanApp .empty .addNewBoard {
+  border-radius: 24px;
+  background-color: #635FC7;
+  padding: 10px 24px;
+}
+body .board .kanbanApp .empty .addNewBoard:hover {
+  cursor: pointer;
+}
+body .board .kanbanApp .empty .addNewBoard p {
   color: white;
   margin: 5px 5px;
   text-align: center;

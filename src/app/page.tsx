@@ -8,6 +8,8 @@ import { AddBoardContext } from "@/context/AddBoardContext";
 import { WhichBoardContext } from "@/context/WhichBoardContext";
 import BoardNavbar from "@/components/boardNavbar/boardNavbar";
 import { NavbarContext } from "@/context/NavbarContext";
+import AddColumn from "@/components/addColumn/addColumn";
+import { AddColumnContext } from "@/context/AddColumnContext";
 
 export default function Board() {
 
@@ -22,7 +24,7 @@ export default function Board() {
   const [whichBoard, setWhichBoard] = useState<string>("")
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
   const [newColumnName, setNewColumnName] = useState<string>("")
-
+  const [addColumn, setAddColumn] = useState<boolean>(false)
   
   const handleNewColumn = (boardIndex:number) => {
 
@@ -34,7 +36,7 @@ export default function Board() {
 
     setNewColumnName('');
   };
-
+  const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
@@ -42,6 +44,7 @@ export default function Board() {
     <AddBoardContext.Provider value={[addBoard, setAddBoard]}>
     <WhichBoardContext.Provider value={[whichBoard, setWhichBoard]}>
     <NavbarContext.Provider value={[navbarOff, setNavbarOff]}>
+    <AddColumnContext.Provider value={[addColumn, setAddColumn]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -49,9 +52,11 @@ export default function Board() {
       <div className="kanbanApp">
       <BoardNavbar />
       {boards.length === 0 ? <div className="empty">
-        <h3>This board is empty. Create a new column to get started.</h3>
-        <div className="addNewColumn">
-          <p>+ Add New Column</p>
+        <h3>Create a new board to get started.</h3>
+        <div className="addNewBoard" onClick={() => {
+          setAddBoard(true)
+        }}>
+          <p>+ Add New Board</p>
         </div>
       </div> : <div className="columns">
         {boards.map((board:Board) => (
@@ -61,13 +66,17 @@ export default function Board() {
             </div>
           )) : null
         ))}
-        <div className="newColumn">
+        <div className="newColumn" onClick={() => {
+          setAddColumn(true)
+        }}>
             <h2>+ New Column</h2>
         </div>  
       </div>}
       </div>
       {addBoard && <AddBoard />}
+      {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
     </div>
+    </AddColumnContext.Provider>
     </NavbarContext.Provider>
     </WhichBoardContext.Provider>
     </AddBoardContext.Provider>
