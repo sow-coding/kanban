@@ -23,19 +23,17 @@ export default function Board() {
   const [addBoard, setAddBoard] = useState<boolean>(false)
   const [whichBoard, setWhichBoard] = useState<string>("")
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
-  const [newColumnName, setNewColumnName] = useState<string>("")
   const [addColumn, setAddColumn] = useState<boolean>(false)
   
-  const handleNewColumn = (boardIndex:number) => {
+  const handleNewColumn = (boardIndex:number, newColumns: string[]) => {
 
     const updatedBoards: Board[] = [...boards];
 
-    updatedBoards[boardIndex].columns?.push(newColumnName);
+    updatedBoards[boardIndex]?.columns?.push(...newColumns);
 
     setBoards(updatedBoards);
-
-    setNewColumnName('');
   };
+
   const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
 
   return (

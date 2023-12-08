@@ -5,14 +5,13 @@ import React, {useContext, useState} from 'react'
 
 interface addColumnProps {
     boardIndex: number;
-    handleNewColumn: (boardIndex: number) => void
+    handleNewColumn: (boardIndex: number, newColumns: string[]) => void;
 }
 
 function AddColumn(props:addColumnProps) {
     const [addColumn, setAddColumn] = useContext(AddColumnContext)
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [columnsBoard, setColumnsBoard] = useState<string[]>([])
-    const [boards, setBoards] = useContext(BoardsContext)
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
@@ -49,8 +48,7 @@ function AddColumn(props:addColumnProps) {
                 <p>+ Add New Column</p>
             </div>
             <div className="createNewColumn" onClick={() => {
-                props.handleNewColumn(props.boardIndex)
-                //Rajouter le truc que j'ai ecrit dans new column qu'il soit capte !
+                props.handleNewColumn(props.boardIndex, columnsBoard)
                 setAddColumn(false)
             }}>
                 <p>Create New Column</p>
