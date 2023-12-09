@@ -15,7 +15,7 @@ function BoardNavbar() {
         </div>
         <div className="navigation">
             <div className="addNewTask">
-                <p>+ Add New Task</p>
+                <p>+<span className='newTaskSpan'> Add New Task</span></p>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="20" viewBox="0 0 5 20" fill="none">
             <circle cx="2.30769" cy="2.30769" r="2.30769" fill="#828FA3"/>

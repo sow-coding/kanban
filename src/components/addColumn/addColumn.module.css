@@ -9,18 +9,19 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
 }
-.calc .addColumn {
+
+.addColumn {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: white;
+  background-color: var(--bg-color);
   border-radius: 6px;
   padding: 32px 32px;
   width: 35%;
 }
-.calc .addColumn h1 {
+.addColumn h1 {
   color: var(--p-color);
   font-feature-settings: "clig" off, "liga" off;
   font-size: 18px;
@@ -28,12 +29,12 @@
   font-weight: 700;
   line-height: normal;
 }
-.calc .addColumn .columnsBoard {
+.addColumn .columnsBoard {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
-.calc .addColumn .columnsBoard label {
+.addColumn .columnsBoard label {
   color: #828FA3;
   font-feature-settings: "clig" off, "liga" off;
   font-size: 12px;
@@ -42,13 +43,13 @@
   line-height: normal;
   margin-bottom: 7px;
 }
-.calc .addColumn .columnsBoard .columnBoard {
+.addColumn .columnsBoard .columnBoard {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 5px 0;
 }
-.calc .addColumn .columnsBoard .columnBoard input {
+.addColumn .columnsBoard .columnBoard input {
   border-radius: 4px;
   border: 1.5px solid rgba(130, 143, 163, 0.25);
   padding: 12px 16px;
@@ -56,10 +57,10 @@
   background-color: var(--bg-color);
   color: var(--p-color);
 }
-.calc .addColumn .columnsBoard .columnBoard svg:hover {
+.addColumn .columnsBoard .columnBoard svg:hover {
   cursor: pointer;
 }
-.calc .addColumn .addNewColumn {
+.addColumn .addNewColumn {
   border-radius: 20px;
   background: rgba(99, 95, 199, 0.1);
   padding: 12px 0;
@@ -70,10 +71,10 @@
   justify-content: center;
   margin: 15px 0 0 0;
 }
-.calc .addColumn .addNewColumn:hover {
+.addColumn .addNewColumn:hover {
   cursor: pointer;
 }
-.calc .addColumn .addNewColumn p {
+.addColumn .addNewColumn p {
   color: #635FC7;
   text-align: center;
   font-size: 13px;
@@ -82,7 +83,7 @@
   line-height: 23px; /* 176.923% */
   margin: 0 0;
 }
-.calc .addColumn .createNewColumn {
+.addColumn .createNewColumn {
   border-radius: 20px;
   background: #635FC7;
   padding: 12px 0;
@@ -93,10 +94,10 @@
   justify-content: center;
   margin: 15px 0 0 0;
 }
-.calc .addColumn .createNewColumn:hover {
+.addColumn .createNewColumn:hover {
   cursor: pointer;
 }
-.calc .addColumn .createNewColumn p {
+.addColumn .createNewColumn p {
   color: white;
   text-align: center;
   font-size: 13px;
@@ -104,4 +105,75 @@
   font-weight: 700;
   line-height: 23px; /* 176.923% */
   margin: 0 0;
+}
+
+@media (max-width: 3000px) {
+  .addColumn {
+    width: 25%;
+  }
+}
+@media (max-width: 2300px) {
+  .addColumn {
+    width: 30%;
+  }
+}
+@media (max-width: 2000px) {
+  .addColumn {
+    width: 33%;
+  }
+}
+@media (max-width: 1800px) {
+  .addColumn {
+    width: 36%;
+  }
+}
+@media (max-width: 1600px) {
+  .addColumn {
+    width: 38.5%;
+  }
+}
+@media (max-width: 1450px) {
+  .addColumn {
+    width: 42%;
+  }
+}
+@media (max-width: 1300px) {
+  .addColumn {
+    width: 44%;
+  }
+}
+@media (max-width: 1100px) {
+  .addColumn {
+    width: 47%;
+  }
+}
+@media (max-width: 950px) {
+  .addColumn {
+    width: 50%;
+  }
+}
+@media (max-width: 850px) {
+  .addColumn {
+    width: 53%;
+  }
+}
+@media (max-width: 725px) {
+  .addColumn {
+    width: 56%;
+  }
+}
+@media (max-width: 600px) {
+  .addColumn {
+    width: 60%;
+  }
+}
+@media (max-width: 450px) {
+  .addColumn {
+    width: 80%;
+  }
+}
+@media (max-width: 320px) {
+  .addColumn {
+    width: 95%;
+  }
 }/*# sourceMappingURL=addColumn.module.css.map */

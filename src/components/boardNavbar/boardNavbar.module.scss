@@ -47,3 +47,39 @@
         }
     }
 }
+
+@media (max-width: 1000px) {
+    .boardNavbar {
+        & .navigation {
+            width: 40%;
+        }
+    }
+}
+
+@media (max-width: 770px) {
+    .boardNavbar {
+        & .navigation {
+            width: 50%;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .boardNavbar {
+        & .navigation {
+            width: 55%;
+        }
+    }
+}
+
+@media (max-width: 599px) {
+    .boardNavbar {
+        padding: 0px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .newTaskSpan {
+        display: none;
+    }
+}

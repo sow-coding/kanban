@@ -13,11 +13,13 @@
 :root {
     --bg-color: #F4F7FD;
     --p-color: #000;
+    --newColumnBg: #E9EFFA;
 }
 
 [data-theme='dark'] {
     --bg-color: #20212C;
     --p-color: #fff;
+    --newColumnBg: rgba(43, 44, 55, 0.25);
 }
 
 body {
@@ -28,6 +30,7 @@ body {
         background-color: var(--bg-color);
         display: flex;
         align-items: start;
+        position: relative;
         & .kanbanApp {
             display: flex;
             flex-direction: column;
@@ -90,11 +93,12 @@ body {
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
+                        border-radius: 6px;
                     }
                     & .newColumn {
                         width: 100%;
                         height: 100%;
-                        background-color: #E9EFFA;
+                        background-color: var(--newColumnBg);
                         display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -117,6 +121,48 @@ body {
                         }
                     }                
                 }
+            }
+        }
+        @keyframes shake {
+            0%, 100% {
+              transform: translate(-50%, -50%) translateX(0);
+            }
+            25%, 75% {
+              transform: translate(-50%, -50%) translateX(-5px);
+            }
+            50% {
+              transform: translate(-50%, -50%) translateX(5px);
+            }
+          }
+          
+          @keyframes colorChange {
+            0% {
+              color: red; 
+            }
+            25% {
+              color: blue; 
+            }
+            50% {
+              color: green; 
+            }
+            75% {
+              color: #635FC7; 
+            }
+            100% {
+              color: red; 
+            }
+          }
+
+        & .clickBoard {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            & h1 {
+                transform: translate(-50%, -50%);
+                color: var(--p-color);
+                animation: shake 1.5s ease-in-out infinite, colorChange 6s ease-in-out infinite;
+                text-align: center;  
             }
         }
     }

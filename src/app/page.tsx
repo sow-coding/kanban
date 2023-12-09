@@ -2,7 +2,7 @@
 import Navbar from "@/components/navbar/navbar";
 import { BoardsContext } from "@/context/BoardsContext";
 import { ThemeContext } from "@/context/ThemeContext";
-import { useState, SetStateAction } from "react";
+import { useState } from "react";
 import AddBoard from '@/components/addBoard/addBoard'
 import { AddBoardContext } from "@/context/AddBoardContext";
 import { WhichBoardContext } from "@/context/WhichBoardContext";
@@ -16,6 +16,7 @@ export default function Board() {
   interface Board {
     nameOfTheBoard: string;
     columns?: string[]
+    //columsSets sur un Column type qui a genre Name et apres Task qui est object avec name etc
   }
 
   const [boards, setBoards] = useState<Board[]>([])
@@ -64,11 +65,15 @@ export default function Board() {
             </div>
           )) : null
         ))}
-        <div className="newColumn" onClick={() => {
-          setAddColumn(true)
-        }}>
-            <h2>+ New Column</h2>
-        </div>  
+        {
+          whichBoard !== "" ? <div className="newColumn" onClick={() => {
+            setAddColumn(true)
+          }}>
+              <h2>+ New Column</h2>
+          </div>  : <div className="clickBoard">
+            <h1>You{`'`}ve just created your first board, click on it by the sidebar at the left ;{`)`}</h1>
+          </div>
+        }
       </div>}
       </div>
       {addBoard && <AddBoard />}
