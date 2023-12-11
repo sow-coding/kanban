@@ -10,6 +10,8 @@ import BoardNavbar from "@/components/boardNavbar/boardNavbar";
 import { NavbarContext } from "@/context/NavbarContext";
 import AddColumn from "@/components/addColumn/addColumn";
 import { AddColumnContext } from "@/context/AddColumnContext";
+import AddNewTask from "@/components/addNewTask/addNewTask";
+import { AddTaskContext } from "@/context/addTaskContext";
 
 export default function Board() {
 
@@ -20,12 +22,13 @@ export default function Board() {
   }
 
   const [boards, setBoards] = useState<Board[]>([])
-  const [theme, setTheme] = useState<boolean>(false)
+  const [theme, setTheme] = useState<boolean>(true)
   const [addBoard, setAddBoard] = useState<boolean>(false)
   const [whichBoard, setWhichBoard] = useState<string>("")
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
   const [addColumn, setAddColumn] = useState<boolean>(false)
-  
+  const [addTask, setAddtask] = useState<boolean>(false)
+
   const handleNewColumn = (boardIndex:number, newColumns: string[]) => {
 
     const updatedBoards: Board[] = [...boards];
@@ -44,6 +47,7 @@ export default function Board() {
     <WhichBoardContext.Provider value={[whichBoard, setWhichBoard]}>
     <NavbarContext.Provider value={[navbarOff, setNavbarOff]}>
     <AddColumnContext.Provider value={[addColumn, setAddColumn]}>
+    <AddTaskContext.Provider value={[addTask, setAddtask]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -78,7 +82,9 @@ export default function Board() {
       </div>
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
+      {addTask && <AddNewTask/>}
     </div>
+    </AddTaskContext.Provider>
     </AddColumnContext.Provider>
     </NavbarContext.Provider>
     </WhichBoardContext.Provider>
