@@ -1,17 +1,26 @@
 "use client"
 import { AddColumnContext } from '@/context/AddColumnContext'
-import { BoardsContext } from '@/context/BoardsContext'
 import React, {useContext, useState} from 'react'
 
+interface ColumnType {
+    name: string;
+    tasks?: Task[]
+  }
+  interface Task {
+    title: string;
+    description: string;
+    substaks: string[]
+  }
 interface addColumnProps {
     boardIndex: number;
-    handleNewColumn: (boardIndex: number, newColumns: string[]) => void;
+    handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
 }
+
 
 function AddColumn(props:addColumnProps) {
     const [addColumn, setAddColumn] = useContext(AddColumnContext)
     const [columns, setColumns] = useState<string[]>(["first column"])
-    const [columnsBoard, setColumnsBoard] = useState<string[]>([])
+    const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
@@ -32,7 +41,9 @@ function AddColumn(props:addColumnProps) {
             {columns.map((column, index) => (
                 <div className="columnBoard" key={index}>
                 <input type="text" onBlur={(e) => {
-                    setColumnsBoard([...columnsBoard ,`${e.currentTarget.value}`])
+                    setColumnsBoard([...columnsBoard, {
+                        name: e.currentTarget.value
+                    }])
                 }}/>
                 <svg id={`${index}`} onClick={(e) => {
                     deleteColumn(index)

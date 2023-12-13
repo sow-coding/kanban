@@ -4,11 +4,22 @@ import { WhichBoardContext } from '@/context/WhichBoardContext'
 import { AddTaskContext } from '@/context/addTaskContext'
 import React, { useContext, useState } from 'react'
 
+interface Task {
+  title: string;
+  description: string;
+  substaks: string[]
+}
+interface ColumnType {
+  name: string;
+  tasks?: Task[]
+}
 
 interface Board {
   nameOfTheBoard: string;
-  columns?: string[]
+  columns: ColumnType[]
 }
+
+//RAJOUTER FONCTION POUR METTRE LES INFOS DE STATS DANS LE BOARD ETC
 
 function AddNewTask() {
   const [addTask, setAddTask] = useContext(AddTaskContext)
@@ -16,8 +27,8 @@ function AddNewTask() {
   const [boards, setBoards] = useContext(BoardsContext)
   const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
   const [statusOpen, setStatusOpen] = useState<boolean>(false)
-  const selectedBoard = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
-  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0])
+  const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
+  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0].name)
 
   const deleteSubtask = (index: number) => {
     const newSubtask = [...subtaks];
@@ -70,12 +81,12 @@ function AddNewTask() {
         <label htmlFor="status">Status</label>
         <div className="statusAccordion">
             {statusOpen ? <div className='statusList'>
-              {selectedBoard.columns?.map((column: string, index:number) => (
+              {selectedBoard.columns?.map((column: ColumnType, index:number) => (
                 <div key={index} className='state' onClick={() => {
-                  setActualStatus(column)
+                  setActualStatus(column.name)
                   setStatusOpen(false)
                 }}>
-                  <p>{column}</p>
+                  <p>{column.name}</p>
                 </div>
               ))}
             </div> : <div className='statusMenu' onClick={() => {

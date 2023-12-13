@@ -15,10 +15,19 @@ import { AddTaskContext } from "@/context/addTaskContext";
 
 export default function Board() {
 
+  interface Task {
+    title: string;
+    description: string;
+    substaks: string[]
+  }
+  interface ColumnType {
+    name: string;
+    tasks?: Task[]
+  }
+
   interface Board {
     nameOfTheBoard: string;
-    columns?: string[]
-    //columsSets sur un Column type qui a genre Name et apres Task qui est object avec name etc
+    columns?: ColumnType[]
   }
 
   const [boards, setBoards] = useState<Board[]>([])
@@ -29,7 +38,7 @@ export default function Board() {
   const [addColumn, setAddColumn] = useState<boolean>(false)
   const [addTask, setAddtask] = useState<boolean>(false)
 
-  const handleNewColumn = (boardIndex:number, newColumns: string[]) => {
+  const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
     const updatedBoards: Board[] = [...boards];
 
@@ -63,9 +72,9 @@ export default function Board() {
         </div>
       </div> : <div className="columns">
         {boards.map((board:Board) => (
-          board.nameOfTheBoard === whichBoard ? board.columns?.map((column:string, index:number) => (
+          board.nameOfTheBoard === whichBoard ? board.columns?.map((column:ColumnType, index:number) => (
             <div key={index} className="column">
-              <h6>{column}</h6>
+              <h6>{column.name}</h6>
             </div>
           )) : null
         ))}
@@ -82,7 +91,7 @@ export default function Board() {
       </div>
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
-      {addTask && <AddNewTask/>}
+      {addTask && <AddNewTask />}
     </div>
     </AddTaskContext.Provider>
     </AddColumnContext.Provider>
