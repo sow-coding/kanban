@@ -2,6 +2,10 @@
 import { AddColumnContext } from '@/context/AddColumnContext'
 import React, {useContext, useState} from 'react'
 
+interface Subtask {
+    name?: string;
+  }
+
 interface ColumnType {
     name: string;
     tasks?: Task[]
@@ -9,7 +13,7 @@ interface ColumnType {
   interface Task {
     title: string;
     description: string;
-    substaks: string[]
+    substaks: Subtask[]
   }
 interface addColumnProps {
     boardIndex: number;
@@ -17,7 +21,7 @@ interface addColumnProps {
 }
 
 
-function AddColumn(props:addColumnProps) {
+function AddColumn(props: addColumnProps) {
     const [addColumn, setAddColumn] = useContext(AddColumnContext)
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])

@@ -15,10 +15,13 @@ import { AddTaskContext } from "@/context/addTaskContext";
 
 export default function Board() {
 
+  interface Subtask {
+    name?: string;
+  }
   interface Task {
     title: string;
     description: string;
-    substaks: string[]
+    substaks?: Subtask[]
   }
   interface ColumnType {
     name: string;
@@ -75,6 +78,13 @@ export default function Board() {
           board.nameOfTheBoard === whichBoard ? board.columns?.map((column:ColumnType, index:number) => (
             <div key={index} className="column">
               <h6>{column.name}</h6>
+              <ul>
+                {column.tasks?.map((Task: Task, index: number) => (
+                  <li key={index}>
+                    {Task.title}
+                  </li>
+                ))}
+              </ul>
             </div>
           )) : null
         ))}
@@ -91,7 +101,7 @@ export default function Board() {
       </div>
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
-      {addTask && <AddNewTask />}
+      {addTask && <AddNewTask boardIndex={boardIndex}/>}
     </div>
     </AddTaskContext.Provider>
     </AddColumnContext.Provider>

@@ -7,35 +7,52 @@ import React, { useContext, useState } from 'react'
 interface Task {
   title: string;
   description: string;
-  substaks: string[]
+  substaks?: Subtask[]
 }
-interface ColumnType {
-  name: string;
-  tasks?: Task[]
-}
-
 interface Board {
   nameOfTheBoard: string;
   columns: ColumnType[]
 }
+interface ColumnType {
+  name: string;
+  tasks: Task[]
+}
+interface Subtask {
+  name?: string;
+}
 
-//RAJOUTER FONCTION POUR METTRE LES INFOS DE STATS DANS LE BOARD ETC
+interface addNewTaskProps {
+  boardIndex: number;
+}
 
-function AddNewTask() {
+function AddNewTask(props: addNewTaskProps) {
   const [addTask, setAddTask] = useContext(AddTaskContext)
-  const [subtaks, setSubtasks] = useState<string[]>(["first subtask"])
+  const [subtasks, setSubtasks] = useState<string[]>(["first subtask"])
   const [boards, setBoards] = useContext(BoardsContext)
   const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
   const [statusOpen, setStatusOpen] = useState<boolean>(false)
   const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
   const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0].name)
+  const [task, setTask] = useState<Task[]>([])
+  const [titleTask, setTitleTask] = useState<string>("")
+  const [descriptionTask, setDescriptionTask] = useState<string>("")
+  const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
+  const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
 
   const deleteSubtask = (index: number) => {
-    const newSubtask = [...subtaks];
+    const newSubtask = [...subtasks];
     newSubtask.splice(index, 1);
     setSubtasks(newSubtask);
   };
 
+  const handleNewTask = (boardIndex:number, newTask: Task[]) => {
+
+    const updatedBoards: Board[] = [...boards];
+
+    updatedBoards[boardIndex]?.columns[0]?.tasks?.push(...newTask);
+    //Travailler sur la fct d'ajout de task
+    setBoards(updatedBoards);
+  };
 
   return (
     <div className="calc" onClick={() => {
@@ -47,20 +64,26 @@ function AddNewTask() {
       <h1>Add New Task</h1>
       <div className="title">
         <label htmlFor="title">Title</label>
-        <input type="text" placeholder='e.g. Take coffee break'/>
+        <input type="text" placeholder='e.g. Take coffee break' onBlur={(e) => {
+          setTitleTask(e.currentTarget.value)
+        }}/>
       </div>
 
       <div className="description">
         <label htmlFor="description">Description</label>
-        <input type="text" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
+        <input type="text" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.' onBlur={(e) => {
+          setDescriptionTask(e.currentTarget.value)
+        }}/>
       </div>
 
       <div className="subtasks">
         <label htmlFor="subtasks">Substaks</label>
-        {subtaks.map((subtask, index) => (
+        {subtasks.map((subtask, index) => (
                 <div className="subtaskBoard" key={index}>
                 <input type="text" placeholder='e.g. Drink coffee & smile' onBlur={(e) => {
-                    //setColumnsBoard([...columnsBoard ,`${e.currentTarget.value}`])
+                    setSubtasksArray([...subtasksArray, {
+                      name: e.currentTarget.value
+                    }])
                 }}/>
                 <svg id={`${index}`} onClick={(e) => {
                     deleteSubtask(index)
@@ -71,7 +94,7 @@ function AddNewTask() {
             </div>
           ))}       
         <div className="addNewSubtask" onClick={() => {
-                setSubtasks([...subtaks, "new column"])
+                setSubtasks([...subtasks, "new column"])
             }}>
                 <p>+ Add New Subtask</p>
             </div>
@@ -100,7 +123,15 @@ function AddNewTask() {
         </div>
       </div>
 
-      <div className="createNewTask">
+      <div className="createNewTask" onClick={() => {
+        setTask([...task, {
+          title: titleTask,
+          description: descriptionTask,
+          substaks: subtasksArray
+        }])
+        handleNewTask(props.boardIndex, task)
+        setAddTask(false)
+      }}>
         <p>Create Task</p>
       </div>
       </div>
