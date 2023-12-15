@@ -32,12 +32,10 @@ function AddNewTask(props: addNewTaskProps) {
   const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
   const [statusOpen, setStatusOpen] = useState<boolean>(false)
   const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
-  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0].name)
-  const [task, setTask] = useState<Task[]>([])
+  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
   const [titleTask, setTitleTask] = useState<string>("")
   const [descriptionTask, setDescriptionTask] = useState<string>("")
   const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
-  const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
 
   const deleteSubtask = (index: number) => {
     const newSubtask = [...subtasks];
@@ -45,12 +43,16 @@ function AddNewTask(props: addNewTaskProps) {
     setSubtasks(newSubtask);
   };
 
-  const handleNewTask = (boardIndex:number, newTask: Task[]) => {
+  const handleNewTask = (boardIndex:number, newTask: Task) => {
 
     const updatedBoards: Board[] = [...boards];
 
-    updatedBoards[boardIndex]?.columns[0]?.tasks?.push(...newTask);
-    //Travailler sur la fct d'ajout de task
+    const columnIndex :number = updatedBoards[boardIndex]?.columns.findIndex(
+      (column) => column.name === actualStatus
+    );  
+
+    updatedBoards[boardIndex]?.columns[columnIndex]?.tasks?.push(newTask);
+
     setBoards(updatedBoards);
   };
 
@@ -117,19 +119,18 @@ function AddNewTask(props: addNewTaskProps) {
             }}>
             <p>{actualStatus}</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
-              <path d="M0.79834 1.54863L5.49682 6.24711L10.1953 1.54863" stroke="#635FC7" stroke-width="2"/>
+              <path d="M0.79834 1.54863L5.49682 6.24711L10.1953 1.54863" stroke="#635FC7" strokeWidth="2"/>
             </svg>
           </div>}
         </div>
       </div>
 
       <div className="createNewTask" onClick={() => {
-        setTask([...task, {
+        handleNewTask(props.boardIndex, {
           title: titleTask,
           description: descriptionTask,
           substaks: subtasksArray
-        }])
-        handleNewTask(props.boardIndex, task)
+        })
         setAddTask(false)
       }}>
         <p>Create Task</p>

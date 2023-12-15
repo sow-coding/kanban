@@ -12,6 +12,8 @@ import AddColumn from "@/components/addColumn/addColumn";
 import { AddColumnContext } from "@/context/AddColumnContext";
 import AddNewTask from "@/components/addNewTask/addNewTask";
 import { AddTaskContext } from "@/context/addTaskContext";
+import EditBoard from "@/components/editBoard/editBoard";
+import { EditBoardContext } from "@/context/EditBoardContext";
 
 export default function Board() {
 
@@ -40,6 +42,7 @@ export default function Board() {
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
   const [addColumn, setAddColumn] = useState<boolean>(false)
   const [addTask, setAddtask] = useState<boolean>(false)
+  const [editBoard, setEditBoard] = useState<boolean>(false)
 
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
@@ -60,6 +63,7 @@ export default function Board() {
     <NavbarContext.Provider value={[navbarOff, setNavbarOff]}>
     <AddColumnContext.Provider value={[addColumn, setAddColumn]}>
     <AddTaskContext.Provider value={[addTask, setAddtask]}>
+    <EditBoardContext.Provider value={[editBoard, setEditBoard]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -102,7 +106,9 @@ export default function Board() {
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
+      {editBoard && <EditBoard boardIndex={boardIndex}/>}
     </div>
+    </EditBoardContext.Provider>
     </AddTaskContext.Provider>
     </AddColumnContext.Provider>
     </NavbarContext.Provider>

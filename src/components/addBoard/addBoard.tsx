@@ -5,7 +5,7 @@ import { useContext, useState, useRef } from "react"
 
 interface ColumnType {
     name: string;
-    tasks?: Task[]
+    tasks?: Task[];
   }
   interface Task {
     title: string;
@@ -45,8 +45,9 @@ function AddBoard() {
             {columns.map((column, index) => (
                 <div className="columnBoard" key={index}>
                 <input type="text" onBlur={(e) => {
-                    setColumnsBoard([...columnsBoard, {
-                        name: e.currentTarget.value
+                    e.currentTarget.value !== "" && setColumnsBoard([...columnsBoard, {
+                        name: e.currentTarget.value,
+                        tasks: []
                     }])
                 }}/>
                 <svg id={`${index}`} onClick={(e) => {

@@ -1,0 +1,199 @@
+.calc {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.editBoard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  padding: 32px 32px;
+  width: 35%;
+}
+.editBoard h1 {
+  color: var(--p-color);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.editBoard .editBoardName {
+  display: flex;
+  flex-direction: column;
+}
+.editBoard .editBoardName label {
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 7px;
+}
+.editBoard .editBoardName input {
+  border-radius: 4px;
+  border: 1.5px solid rgba(130, 143, 163, 0.25);
+  padding: 12px 16px;
+  background-color: var(--bg-color);
+  color: var(--p-color);
+}
+.editBoard .columnsBoard {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.editBoard .columnsBoard label {
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 7px;
+}
+.editBoard .columnsBoard .columnBoard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+}
+.editBoard .columnsBoard .columnBoard input {
+  border-radius: 4px;
+  border: 1.5px solid rgba(130, 143, 163, 0.25);
+  padding: 12px 16px;
+  width: 90%;
+  background-color: var(--bg-color);
+  color: var(--p-color);
+}
+.editBoard .columnsBoard .columnBoard svg:hover {
+  cursor: pointer;
+}
+.editBoard .addNewColumn {
+  border-radius: 20px;
+  background: rgba(99, 95, 199, 0.1);
+  padding: 12px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0 0;
+}
+.editBoard .addNewColumn:hover {
+  cursor: pointer;
+}
+.editBoard .addNewColumn p {
+  color: #635FC7;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23px; /* 176.923% */
+  margin: 0 0;
+}
+.editBoard .saveChanges {
+  border-radius: 20px;
+  background: #635FC7;
+  padding: 12px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0 0;
+}
+.editBoard .saveChanges:hover {
+  cursor: pointer;
+}
+.editBoard .saveChanges p {
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23px; /* 176.923% */
+  margin: 0 0;
+}
+
+@media (max-width: 3000px) {
+  .editBoard {
+    width: 25%;
+  }
+}
+@media (max-width: 2300px) {
+  .editBoard {
+    width: 30%;
+  }
+}
+@media (max-width: 2000px) {
+  .editBoard {
+    width: 33%;
+  }
+}
+@media (max-width: 1800px) {
+  .editBoard {
+    width: 36%;
+  }
+}
+@media (max-width: 1600px) {
+  .editBoard {
+    width: 38.5%;
+  }
+}
+@media (max-width: 1450px) {
+  .editBoard {
+    width: 42%;
+  }
+}
+@media (max-width: 1300px) {
+  .editBoard {
+    width: 44%;
+  }
+}
+@media (max-width: 1100px) {
+  .editBoard {
+    width: 47%;
+  }
+}
+@media (max-width: 950px) {
+  .editBoard {
+    width: 50%;
+  }
+}
+@media (max-width: 850px) {
+  .editBoard {
+    width: 53%;
+  }
+}
+@media (max-width: 725px) {
+  .editBoard {
+    width: 56%;
+  }
+}
+@media (max-width: 600px) {
+  .editBoard {
+    width: 60%;
+  }
+}
+@media (max-width: 450px) {
+  .editBoard {
+    width: 80%;
+  }
+}
+@media (max-width: 320px) {
+  .editBoard {
+    width: 95%;
+  }
+}/*# sourceMappingURL=editBoard.module.css.map */

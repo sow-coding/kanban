@@ -45,11 +45,12 @@ function AddColumn(props: addColumnProps) {
             {columns.map((column, index) => (
                 <div className="columnBoard" key={index}>
                 <input type="text" onBlur={(e) => {
-                    setColumnsBoard([...columnsBoard, {
-                        name: e.currentTarget.value
+                    e.currentTarget.value !== "" && setColumnsBoard([...columnsBoard, {
+                        name: e.currentTarget.value,
+                        tasks: []
                     }])
                 }}/>
-                <svg id={`${index}`} onClick={(e) => {
+                <svg id={`${index}`} onClick={() => {
                     deleteColumn(index)
                 }} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <rect x="12.7275" width="3" height="18" transform="rotate(45 12.7275 0)" fill="#828FA3"/>
