@@ -1,6 +1,7 @@
 "use client"
 import { AddBoardContext } from "@/context/AddBoardContext";
 import { BoardsContext } from "@/context/BoardsContext";
+import { WhichBoardContext } from "@/context/WhichBoardContext";
 import { useContext, useState, useRef } from "react"
 
 interface ColumnType {
@@ -19,6 +20,7 @@ function AddBoard() {
     const [boards, setBoards] = useContext(BoardsContext)
     const [nameBoard, setNameBoard] = useState<string>("")
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
+    const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
@@ -68,6 +70,7 @@ function AddBoard() {
                     nameOfTheBoard: `${nameBoard}`,
                     columns: columnsBoard
                 }])
+                boards?.length === 0 && setWhichBoard(nameBoard)
                 setAddBoard(false)
             }}>
                 <p>Create New Board</p>

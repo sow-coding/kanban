@@ -14,6 +14,8 @@ import AddNewTask from "@/components/addNewTask/addNewTask";
 import { AddTaskContext } from "@/context/addTaskContext";
 import EditBoard from "@/components/editBoard/editBoard";
 import { EditBoardContext } from "@/context/EditBoardContext";
+import EditTask from "@/components/editTask/editTask";
+import { EditTaskContext } from "@/context/EditTaskContext";
 
 export default function Board() {
 
@@ -38,11 +40,12 @@ export default function Board() {
   const [boards, setBoards] = useState<Board[]>([])
   const [theme, setTheme] = useState<boolean>(true)
   const [addBoard, setAddBoard] = useState<boolean>(false)
-  const [whichBoard, setWhichBoard] = useState<string>("")
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
   const [addColumn, setAddColumn] = useState<boolean>(false)
   const [addTask, setAddtask] = useState<boolean>(false)
   const [editBoard, setEditBoard] = useState<boolean>(false)
+  const [editTask, setEditTask] = useState<boolean>(false)
+  const [whichBoard, setWhichBoard] = useState<string>("")
 
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
@@ -64,6 +67,7 @@ export default function Board() {
     <AddColumnContext.Provider value={[addColumn, setAddColumn]}>
     <AddTaskContext.Provider value={[addTask, setAddtask]}>
     <EditBoardContext.Provider value={[editBoard, setEditBoard]}>
+    <EditTaskContext.Provider value={[editTask, setEditTask]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -107,7 +111,9 @@ export default function Board() {
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
       {editBoard && <EditBoard boardIndex={boardIndex}/>}
+      {editTask && <EditTask boardIndex={boardIndex}/>}
     </div>
+    </EditTaskContext.Provider>
     </EditBoardContext.Provider>
     </AddTaskContext.Provider>
     </AddColumnContext.Provider>

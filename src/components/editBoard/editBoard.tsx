@@ -25,7 +25,6 @@ interface ColumnType {
   }
 
 function EditBoard(props: editBoardPros) {
-    //Regler le bug de quand je cree/edit board, je suis pas direct dessus !
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
     const [boards, setBoards] = useContext(BoardsContext)
@@ -92,6 +91,7 @@ function EditBoard(props: editBoardPros) {
             </div>
             <div className="saveChanges" onClick={() => {
                saveChanges()
+                setWhichBoard(nameBoard)
             }}>
                 <p>Create New Board</p>
             </div>
