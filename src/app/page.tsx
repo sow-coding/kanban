@@ -46,7 +46,11 @@ export default function Board() {
   const [editBoard, setEditBoard] = useState<boolean>(false)
   const [editTask, setEditTask] = useState<boolean>(false)
   const [whichBoard, setWhichBoard] = useState<string>("")
-
+  const [editedTask, setEditedTask] = useState<Task>({
+    title: "",
+    description: "",
+    substaks: []
+  })
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
     const updatedBoards: Board[] = [...boards];
@@ -57,7 +61,7 @@ export default function Board() {
   };
 
   const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
-
+  const [taskIndex, setTaskIndex] = useState<number>(0)
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
     <BoardsContext.Provider value={[boards, setBoards]}>
@@ -88,7 +92,11 @@ export default function Board() {
               <h6>{column.name}</h6>
               <ul>
                 {column.tasks?.map((Task: Task, index: number) => (
-                  <li key={index}>
+                  <li key={index} onClick={() => {
+                    setEditTask(true)
+                    setEditedTask(Task)
+                    setTaskIndex(index)
+                  }}>
                     {Task.title}
                   </li>
                 ))}
@@ -111,7 +119,7 @@ export default function Board() {
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
       {editBoard && <EditBoard boardIndex={boardIndex}/>}
-      {editTask && <EditTask boardIndex={boardIndex}/>}
+      {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
     </div>
     </EditTaskContext.Provider>
     </EditBoardContext.Provider>
