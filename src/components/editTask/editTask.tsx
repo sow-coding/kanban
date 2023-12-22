@@ -13,7 +13,7 @@ interface editTaskProps {
 interface Task {
     title: string;
     description: string;
-    substaks?: Subtask[]
+    substasks?: Subtask[]
   }
   interface Board {
     nameOfTheBoard: string;
@@ -30,19 +30,19 @@ interface Task {
 
 function EditTask(props: editTaskProps) {
     const [editTask, setEditTask] = useContext(EditTaskContext)
-    const [subtasks, setSubtasks] = useState<string[]>(["first subtask"])
+    const [subtasks, setSubtasks] = useState<Subtask[]>(props.editedTask.substasks ?? [])
     const [boards, setBoards] = useContext(BoardsContext)
     const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
     const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
     const [statusOpen, setStatusOpen] = useState<boolean>(false)
     const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
-    const [titleTask, setTitleTask] = useState<string>("")
-    const [descriptionTask, setDescriptionTask] = useState<string>("")
+    const [titleTask, setTitleTask] = useState<string>(props.editedTask.title)
+    const [descriptionTask, setDescriptionTask] = useState<string>(props.editedTask.description)
     const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
-    const newVersionTask: Task = {
+    const newTask: Task = {
       title: titleTask,
       description: descriptionTask,
-      substaks: subtasksArray
+      substasks: subtasksArray
     }
     const deleteSubtask = (index: number) => {
       const newSubtask = [...subtasks];
@@ -59,14 +59,13 @@ function EditTask(props: editTaskProps) {
 
       updatedBoards[boardIndex].columns[columnIndex].tasks[props.taskIndex] = {
         ...updatedBoards[boardIndex].columns[columnIndex].tasks[props.taskIndex],
-        title: titleTask,
-        description: descriptionTask,
-        substaks: subtasksArray
+        title: editedTask.title,
+        description: editedTask.description,
+        substasks: editedTask.substasks
       }
       
       setBoards(updatedBoards);
     }
-
     return (
     <div className="calc" onClick={() => {
         setEditTask(false)
@@ -91,7 +90,7 @@ function EditTask(props: editTaskProps) {
   
         <div className="subtasks">
           <label htmlFor="subtasks">Substaks</label>
-          {props.editedTask.substaks?.map((subtask, index) => (
+          {subtasks.map((subtask, index) => (
                   <div className="subtaskBoard" key={index}>
                   <input type="text" defaultValue={subtask?.name} placeholder='e.g. Drink coffee & smile' onBlur={(e) => {
                       setSubtasksArray([...subtasksArray, {
@@ -99,8 +98,7 @@ function EditTask(props: editTaskProps) {
                       }])
                   }}/>
                   <svg id={`${index}`} onClick={(e) => {
-                      //deleteSubtask(index)
-                      //CREER FONCTION DE SUPP ICI JE PENSE A PARTIR DU MEME TABLEAU QUI SE MAP
+                      deleteSubtask(index)
                   }} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                   <rect x="12.7275" width="3" height="18" transform="rotate(45 12.7275 0)" fill="#828FA3"/>
                   <rect y="2.12132" width="3" height="18" transform="rotate(-45 0 2.12132)" fill="#828FA3"/>
@@ -108,7 +106,7 @@ function EditTask(props: editTaskProps) {
               </div>
             ))}       
           <div className="addNewSubtask" onClick={() => {
-                  //setSubtasks([...subtasks, "new column"])
+                  setSubtasks([...subtasks, {}])
               }}>
                   <p>+ Add New Subtask</p>
               </div>
@@ -138,7 +136,7 @@ function EditTask(props: editTaskProps) {
         </div>
   
         <div className="saveChanges" onClick={() => {
-          saveChanges(props.boardIndex, newVersionTask)
+          saveChanges(props.boardIndex, newTask)
           setEditTask(false)
         }}>
           <p>Save Changes</p>

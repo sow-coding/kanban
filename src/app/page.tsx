@@ -25,7 +25,7 @@ export default function Board() {
   interface Task {
     title: string;
     description: string;
-    substaks?: Subtask[]
+    substasks?: Subtask[]
   }
   interface ColumnType {
     name: string;
@@ -49,7 +49,7 @@ export default function Board() {
   const [editedTask, setEditedTask] = useState<Task>({
     title: "",
     description: "",
-    substaks: []
+    substasks: []
   })
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
@@ -118,7 +118,7 @@ export default function Board() {
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
-      {editBoard && <EditBoard boardIndex={boardIndex}/>}
+      {editBoard && <EditBoard handleNewColumn={handleNewColumn} boardIndex={boardIndex} />}
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
     </div>
     </EditTaskContext.Provider>

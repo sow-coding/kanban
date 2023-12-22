@@ -12,27 +12,23 @@ interface ColumnType {
   interface Task {
     title: string;
     description: string;
-    substaks: string[]
+    substasks: string[]
   }
 
   interface editBoardPros {
-    boardIndex: number
-  }
-
-  interface ColumnType {
-    name: string;
-    tasks?: Task[]
+    handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
+    boardIndex: number;
   }
 
 function EditBoard(props: editBoardPros) {
-    const [columns, setColumns] = useState<string[]>(["first column"])
-    const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
     const [boards, setBoards] = useContext(BoardsContext)
+    const boardIndex = props.boardIndex
+    const editColumn: ColumnType[] = boards[boardIndex]?.columns
+    const [columns, setColumns] = useState<ColumnType[]>(editColumn)
+    const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
     const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
     const [nameBoard, setNameBoard] = useState<string>(whichBoard)
     const [editBoard, setEditBoard] = useContext(EditBoardContext)
-    const boardIndex = props.boardIndex
-    const editColumn: ColumnType[] = boards[boardIndex]?.columns
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
@@ -68,7 +64,7 @@ function EditBoard(props: editBoardPros) {
 
             <div className="columnsBoard">
             <label htmlFor="columsBoard">Columns</label>
-            {editColumn?.map((column, index) => (
+            {columns?.map((column, index) => (
                 <div className="columnBoard" key={index}>
                 <input type="text" defaultValue={column.name} onBlur={(e) => {
                     e.currentTarget.value !== "" && setColumnsBoard([...columnsBoard, {
@@ -77,8 +73,7 @@ function EditBoard(props: editBoardPros) {
                     }])
                 }}/>
                 <svg id={`${index}`} onClick={(e) => {
-                    //deleteColumn(index)
-                    //CREER FONCTION DE SUPP ICI JE PENSE A PARTIR DU MEME TABLEAU QUI SE MAP
+                    deleteColumn(index)
                 }} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <rect x="12.7275" width="3" height="18" transform="rotate(45 12.7275 0)" fill="#828FA3"/>
                 <rect y="2.12132" width="3" height="18" transform="rotate(-45 0 2.12132)" fill="#828FA3"/>
@@ -86,15 +81,18 @@ function EditBoard(props: editBoardPros) {
             </div>
             ))}
             <div className="addNewColumn" onClick={() => {
-                //setColumns([...columns, "new column"])
+                setColumns([...columns, {
+                    name: ""
+                }])
             }}>
                 <p>+ Add New Column</p>
             </div>
             <div className="saveChanges" onClick={() => {
-               saveChanges()
+                props.handleNewColumn(boardIndex, columnsBoard)
+                saveChanges()
                 setWhichBoard(nameBoard)
             }}>
-                <p>Create New Board</p>
+                <p>Save Changes</p>
             </div>
         </div>
         </div>

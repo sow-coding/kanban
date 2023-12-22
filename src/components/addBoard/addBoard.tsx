@@ -11,7 +11,7 @@ interface ColumnType {
   interface Task {
     title: string;
     description: string;
-    substaks: string[]
+    substasks: string[]
   }
 
 function AddBoard() {

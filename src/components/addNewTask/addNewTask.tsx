@@ -7,7 +7,7 @@ import React, { useContext, useState } from 'react'
 interface Task {
   title: string;
   description: string;
-  substaks?: Subtask[]
+  substasks?: Subtask[]
 }
 interface Board {
   nameOfTheBoard: string;
@@ -129,7 +129,7 @@ function AddNewTask(props: addNewTaskProps) {
         handleNewTask(props.boardIndex, {
           title: titleTask,
           description: descriptionTask,
-          substaks: subtasksArray
+          substasks: subtasksArray
         })
         setAddTask(false)
       }}>
