@@ -87,7 +87,7 @@ export default function Board() {
         </div>
       </div> : <div className="columns">
         {boards.map((board:Board) => (
-          board.nameOfTheBoard === whichBoard ? board.columns?.map((column:ColumnType, index:number) => (
+          board.nameOfTheBoard === whichBoard ? board?.columns?.map((column:ColumnType, index:number) => (
             <div key={index} className="column">
               <h6>{column.name}</h6>
               <ul>
