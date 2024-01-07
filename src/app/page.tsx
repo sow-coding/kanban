@@ -16,6 +16,8 @@ import EditBoard from "@/components/editBoard/editBoard";
 import { EditBoardContext } from "@/context/EditBoardContext";
 import EditTask from "@/components/editTask/editTask";
 import { EditTaskContext } from "@/context/EditTaskContext";
+import DeleteBoard from "@/components/deleteBoard/deleteBoard";
+import { DeleteBoardContext } from "@/context/DeleteBoardContext";
 
 export default function Board() {
 
@@ -51,6 +53,7 @@ export default function Board() {
     description: "",
     substasks: []
   })
+  const [deleteBoard, setDeleteBoard] = useState<boolean>(false)
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
 
     const updatedBoards: Board[] = [...boards];
@@ -72,6 +75,7 @@ export default function Board() {
     <AddTaskContext.Provider value={[addTask, setAddtask]}>
     <EditBoardContext.Provider value={[editBoard, setEditBoard]}>
     <EditTaskContext.Provider value={[editTask, setEditTask]}>
+    <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -120,7 +124,9 @@ export default function Board() {
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
       {editBoard && <EditBoard handleNewColumn={handleNewColumn} boardIndex={boardIndex} />}
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
+      {deleteBoard && <DeleteBoard />}
     </div>
+    </DeleteBoardContext.Provider>
     </EditTaskContext.Provider>
     </EditBoardContext.Provider>
     </AddTaskContext.Provider>

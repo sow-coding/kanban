@@ -8,7 +8,6 @@ import { setTimeout } from 'timers/promises';
 interface Subtask {
     name?: string;
   }
-
 interface ColumnType {
     name: string;
     tasks?: Task[]
@@ -18,7 +17,6 @@ interface ColumnType {
     description: string;
     substaks: Subtask[]
   }
-
   interface editBoardPros {
     handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
     boardIndex: number;
@@ -50,7 +48,7 @@ function EditBoard(props: editBoardPros) {
     const filteredColumnsBoard = columnsBoard.filter((column, index) => {
         return JSON.stringify(editColumn[index]) !== JSON.stringify(column);
     });
-    console.log(editColumn, columnsBoard)
+
     function getUpdatedColumns(editColumn: ColumnType[], columnsBoard: ColumnType[]): ColumnType[] {
         const isSame = JSON.stringify(editColumn) === JSON.stringify(columnsBoard);
     
@@ -62,18 +60,20 @@ function EditBoard(props: editBoardPros) {
             return columnsBoard;
         }
     }
+//Regle le probleme de la column a metttre dans saveChanges, 
+//il doit avoir fonction dans input qui change sa valeur a lui dans columnBoards, qui lui sera poste!
+//chaque input rechange sa valeur a lui du coup que columnsBoard pris en compte et changement sur lui !
     const saveChanges = () => {
         const updatedBoards = [...boards];
-        const updatedColumns = getUpdatedColumns(editColumn, columnsBoard);
+        //const updatedColumns = getUpdatedColumns(editColumn, columnsBoard);
         updatedBoards[boardIndex] = {
           ...updatedBoards[boardIndex],
           nameOfTheBoard: nameBoard,
-          columns: updatedColumns, 
+          columns: columnsBoard, 
         };
         setBoards(updatedBoards);
         setEditBoard(false);
     };
-    
   return (
     <div className='calc' onClick={() => {
         setEditBoard(false)
