@@ -1,16 +1,46 @@
+import { BoardsContext } from '@/context/BoardsContext'
 import { DeleteBoardContext } from '@/context/DeleteBoardContext'
+import { OptionsContext } from '@/context/OptionsContext'
+import { WhichBoardContext } from '@/context/WhichBoardContext'
 import React, { useContext } from 'react'
 
-function DeleteBoard() {
+interface deleteBoardProp {
+    boardIndex: number
+}
+
+function DeleteBoard(props: deleteBoardProp) {
     const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
+    const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
+    const [options, setOptions] = useContext(OptionsContext)
+    const [boards, setBoards] = useContext(BoardsContext)
+    //terminer le delete ici
   return (
     <div className="calc" onClick={() => {
         setDeleteBoard(false)
-    }}>
+        setOptions(false)
+    }}> 
         <div className="deleteBoard" onClick={(e) => {
             e.stopPropagation()
         }}>
-            <h1>Delete Board</h1>
+            <h1>Delete this board ?</h1>
+            <p>Are you sure you want to delete the {whichBoard} board ? This action will remove all columns and tasks and cannot be reversed.</p>
+            <div className="deleteBoardButtons">
+                <div className="delete" onClick={() => {
+                    const newBoards = [...boards]
+                    newBoards.splice(props.boardIndex, 1)
+                    setBoards(newBoards)
+                    setDeleteBoard(false)
+                    setOptions(false)
+                }}>
+                    <p>Delete</p>
+                </div>
+                <div className="cancel" onClick={() => {
+                    setDeleteBoard(false)
+                    setOptions(false)
+                    }}>
+                    <p>Cancel</p>
+                </div>
+            </div>
         </div>
     </div>
   )

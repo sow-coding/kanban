@@ -3,7 +3,6 @@ import { BoardsContext } from '@/context/BoardsContext'
 import { EditBoardContext } from '@/context/EditBoardContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
 import React, { useState, useContext } from 'react'
-import { setTimeout } from 'timers/promises';
 
 interface Subtask {
     name?: string;
@@ -31,6 +30,7 @@ function EditBoard(props: editBoardPros) {
     const [editBoard, setEditBoard] = useContext(EditBoardContext)
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>(editColumn || [])
     const [columns, setColumns] = useState<ColumnType[]>(columnsBoard)
+    const [lengthIncreased, setLengthIncreased] = useState(false);
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columnsBoard];
@@ -39,33 +39,8 @@ function EditBoard(props: editBoardPros) {
         setColumns(newColumns)
     };
 
-    function removeEmptyColumns() {
-        const filteredColumns = columnsBoard.filter(column => column.name !== "");
-      
-        setColumnsBoard(filteredColumns)
-    }  
-
-    const filteredColumnsBoard = columnsBoard.filter((column, index) => {
-        return JSON.stringify(editColumn[index]) !== JSON.stringify(column);
-    });
-
-    function getUpdatedColumns(editColumn: ColumnType[], columnsBoard: ColumnType[]): ColumnType[] {
-        const isSame = JSON.stringify(editColumn) === JSON.stringify(columnsBoard);
-    
-        if (isSame) {
-            return editColumn;
-        } else if (editColumn.length === columnsBoard.length) {
-            return filteredColumnsBoard;
-        } else {
-            return columnsBoard;
-        }
-    }
-//Regle le probleme de la column a metttre dans saveChanges, 
-//il doit avoir fonction dans input qui change sa valeur a lui dans columnBoards, qui lui sera poste!
-//chaque input rechange sa valeur a lui du coup que columnsBoard pris en compte et changement sur lui !
     const saveChanges = () => {
         const updatedBoards = [...boards];
-        //const updatedColumns = getUpdatedColumns(editColumn, columnsBoard);
         updatedBoards[boardIndex] = {
           ...updatedBoards[boardIndex],
           nameOfTheBoard: nameBoard,
@@ -74,6 +49,7 @@ function EditBoard(props: editBoardPros) {
         setBoards(updatedBoards);
         setEditBoard(false);
     };
+
   return (
     <div className='calc' onClick={() => {
         setEditBoard(false)
@@ -94,10 +70,15 @@ function EditBoard(props: editBoardPros) {
             {columns?.map((column, index) => (
                 <div className="columnBoard" key={index}>
                 <input type="text" defaultValue={column.name} onBlur={(e) => {
-                    (e.currentTarget.value !== "" && e.currentTarget.value !== column.name) && setColumnsBoard([...columnsBoard, {
-                        name: e.currentTarget.value,
-                        tasks: []
-                    }]);
+                    if (lengthIncreased === false) {
+                    const newColumns = [...columnsBoard];
+                    newColumns[index].name = e.currentTarget.value;
+                    setColumnsBoard(newColumns);
+                    } else if (lengthIncreased === true ) {
+                        setColumnsBoard([...columnsBoard, {
+                            name: e.currentTarget.value
+                        }])
+                    }
                 }}/>
                 <svg id={`${index}`} onClick={() => {
                     deleteColumn(index)
@@ -108,6 +89,9 @@ function EditBoard(props: editBoardPros) {
             </div>
             ))}
             <div className="addNewColumn" onClick={() => {
+                if (columns.length >= editColumn.length) {
+                    setLengthIncreased(true);
+                }
                 setColumns([...columns, {
                     name: ""
                 }])
@@ -115,7 +99,6 @@ function EditBoard(props: editBoardPros) {
                 <p>+ Add New Column</p>
             </div>
             <div className="saveChanges" onClick={() => {
-                removeEmptyColumns()
                 saveChanges()
                 setWhichBoard(nameBoard)
             }}>

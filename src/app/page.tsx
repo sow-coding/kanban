@@ -18,6 +18,7 @@ import EditTask from "@/components/editTask/editTask";
 import { EditTaskContext } from "@/context/EditTaskContext";
 import DeleteBoard from "@/components/deleteBoard/deleteBoard";
 import { DeleteBoardContext } from "@/context/DeleteBoardContext";
+import { OptionsContext } from "@/context/OptionsContext";
 
 export default function Board() {
 
@@ -65,6 +66,8 @@ export default function Board() {
 
   const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
   const [taskIndex, setTaskIndex] = useState<number>(0)
+  const [options, setOptions] = useState<boolean>(false)
+
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
     <BoardsContext.Provider value={[boards, setBoards]}>
@@ -76,11 +79,12 @@ export default function Board() {
     <EditBoardContext.Provider value={[editBoard, setEditBoard]}>
     <EditTaskContext.Provider value={[editTask, setEditTask]}>
     <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
+    <OptionsContext.Provider value={[options, setOptions]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
       <Navbar />
-      <div className="kanbanApp">
+      <div className="kanbanApp" onClick={() => {setOptions(false)}}>
       <BoardNavbar />
       {boards.length === 0 ? <div className="empty">
         <h3>Create a new board to get started.</h3>
@@ -124,8 +128,9 @@ export default function Board() {
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
       {editBoard && <EditBoard handleNewColumn={handleNewColumn} boardIndex={boardIndex} />}
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
-      {deleteBoard && <DeleteBoard />}
+      {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
     </div>
+    </OptionsContext.Provider>
     </DeleteBoardContext.Provider>
     </EditTaskContext.Provider>
     </EditBoardContext.Provider>
