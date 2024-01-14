@@ -8,13 +8,26 @@ interface deleteBoardProp {
     boardIndex: number
 }
 
+interface Board {
+    nameOfTheBoard: string;
+}
+
 function DeleteBoard(props: deleteBoardProp) {
     const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
     const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
     const [options, setOptions] = useContext(OptionsContext)
     const [boards, setBoards] = useContext(BoardsContext)
-    //terminer le delete ici
-  return (
+    
+    const nextBoard = () => {
+        if (props.boardIndex > 0) {
+            return boards[props.boardIndex - 1]?.nameOfTheBoard
+        } else {
+            setBoards([])
+            return ""
+        }
+    }
+
+    return (
     <div className="calc" onClick={() => {
         setDeleteBoard(false)
         setOptions(false)
@@ -29,6 +42,7 @@ function DeleteBoard(props: deleteBoardProp) {
                     const newBoards = [...boards]
                     newBoards.splice(props.boardIndex, 1)
                     setBoards(newBoards)
+                    setWhichBoard(nextBoard)
                     setDeleteBoard(false)
                     setOptions(false)
                 }}>

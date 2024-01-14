@@ -67,6 +67,7 @@ export default function Board() {
   const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
   const [taskIndex, setTaskIndex] = useState<number>(0)
   const [options, setOptions] = useState<boolean>(false)
+  const [deleteTask, setDeleteTask] = useState<boolean>(false)
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
@@ -80,6 +81,7 @@ export default function Board() {
     <EditTaskContext.Provider value={[editTask, setEditTask]}>
     <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
     <OptionsContext.Provider value={[options, setOptions]}>
+    <DeleteBoardContext.Provider value={[deleteTask, setDeleteTask]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -130,6 +132,7 @@ export default function Board() {
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
     </div>
+    </DeleteBoardContext.Provider>
     </OptionsContext.Provider>
     </DeleteBoardContext.Provider>
     </EditTaskContext.Provider>

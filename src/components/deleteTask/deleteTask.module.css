@@ -10,7 +10,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.deleteBoard {
+.deleteTask {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -21,7 +21,7 @@
   padding: 32px 32px;
   width: 35%;
 }
-.deleteBoard h1 {
+.deleteTask h1 {
   color: #EA5555;
   font-feature-settings: "clig" off, "liga" off;
   font-size: 18px;
@@ -29,7 +29,7 @@
   font-weight: 700;
   line-height: normal;
 }
-.deleteBoard p {
+.deleteTask p {
   color: #828FA3;
   font-feature-settings: "clig" off, "liga" off;
   font-size: 13px;
@@ -37,13 +37,13 @@
   font-weight: 500;
   line-height: 23px; /* 176.923% */
 }
-.deleteBoard div {
+.deleteTask div {
   width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.deleteBoard div .delete {
+.deleteTask div .delete {
   width: 45%;
   border-radius: 20px;
   background-color: #EA5555;
@@ -51,10 +51,10 @@
   display: flex;
   justify-content: center;
 }
-.deleteBoard div .delete:hover {
+.deleteTask div .delete:hover {
   cursor: pointer;
 }
-.deleteBoard div .delete p {
+.deleteTask div .delete p {
   margin: 0 0;
   color: var(--p-color);
   font-size: 13px;
@@ -62,7 +62,7 @@
   font-weight: 700;
   line-height: 23px; /* 176.923% */
 }
-.deleteBoard div .cancel {
+.deleteTask div .cancel {
   display: flex;
   justify-content: center;
   width: 45%;
@@ -70,10 +70,10 @@
   background-color: var(--p-color);
   padding: 8px 75px;
 }
-.deleteBoard div .cancel:hover {
+.deleteTask div .cancel:hover {
   cursor: pointer;
 }
-.deleteBoard div .cancel p {
+.deleteTask div .cancel p {
   margin: 0 0;
   color: #635FC7;
   font-size: 13px;
@@ -83,72 +83,72 @@
 }
 
 @media (max-width: 3000px) {
-  .deleteBoard {
+  .deleteTask {
     width: 25%;
   }
 }
 @media (max-width: 2300px) {
-  .deleteBoard {
+  .deleteTask {
     width: 30%;
   }
 }
 @media (max-width: 2000px) {
-  .deleteBoard {
+  .deleteTask {
     width: 33%;
   }
 }
 @media (max-width: 1800px) {
-  .deleteBoard {
+  .deleteTask {
     width: 36%;
   }
 }
 @media (max-width: 1600px) {
-  .deleteBoard {
+  .deleteTask {
     width: 38.5%;
   }
 }
 @media (max-width: 1450px) {
-  .deleteBoard {
+  .deleteTask {
     width: 42%;
   }
 }
 @media (max-width: 1300px) {
-  .deleteBoard {
+  .deleteTask {
     width: 44%;
   }
 }
 @media (max-width: 1100px) {
-  .deleteBoard {
+  .deleteTask {
     width: 47%;
   }
 }
 @media (max-width: 950px) {
-  .deleteBoard {
+  .deleteTask {
     width: 50%;
   }
 }
 @media (max-width: 850px) {
-  .deleteBoard {
+  .deleteTask {
     width: 53%;
   }
 }
 @media (max-width: 725px) {
-  .deleteBoard {
+  .deleteTask {
     width: 56%;
   }
 }
 @media (max-width: 600px) {
-  .deleteBoard {
+  .deleteTask {
     width: 60%;
   }
 }
 @media (max-width: 450px) {
-  .deleteBoard {
+  .deleteTask {
     width: 80%;
   }
 }
 @media (max-width: 320px) {
-  .deleteBoard {
+  .deleteTask {
     width: 95%;
   }
-}/*# sourceMappingURL=deleteBoard.module.css.map */
+}/*# sourceMappingURL=deleteTask.module.css.map */
