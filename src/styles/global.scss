@@ -7,6 +7,7 @@
 @import "../components/editBoard/editBoard.module.css";
 @import "../components/editTask/editTask.module.css";
 @import "../components/deleteBoard/deleteBoard.module.css";
+@import "../components/deleteTask/deleteTask.module.css";
 * {
     box-sizing: border-box;
     &:focus {
@@ -17,17 +18,25 @@
 :root {
     --bg-color: #F4F7FD;
     --p-color: #000;
-    --newColumnBg: #E9EFFA;
+    --newColumnBg: #F4F7FD;
+    --taskBg: #fff;
+    --boardStick: #F3eff7;
+    --border: #E4EBFA;
 }
 
 [data-theme='dark'] {
     --bg-color: #20212C;
     --p-color: #fff;
-    --newColumnBg: rgba(43, 44, 55, 0.25);
+    --newColumnBg: #000;
+    --taskBg: #2B2C37;
+    --boardStick: #fff;
+    --border: #3E3F4E;
 }
 
 body {
     margin: 0 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
     & .board {
         width: 100%;
         height: 100vh;
@@ -48,6 +57,7 @@ body {
                 justify-content: center;
                 width: 100%;
                 height: 100vh;
+                overflow-x: auto;
                 & h3 {
                     color: #828FA3;
                     text-align: center;
@@ -76,6 +86,7 @@ body {
                     padding: 10px 24px;
                     &:hover {
                         cursor: pointer;
+                        background-color: #A8A4FF;
                     }
                     & p {
                         color: white;
@@ -86,18 +97,78 @@ body {
             }
                 & .columns {
                     width: 100%;
+                    max-width: 100%;
                     height: 100vh;
                     display: flex;
                     align-items: start;
+                    overflow-x: auto;
                     & .column {
                         width: 60%;
                         height: 100%;
-                        background-color: aqua;
                         display: flex;
                         flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
                         border-radius: 6px;
+                        max-width: 350px;//set up responsive
+                        min-width: 275px;
+                        padding: 0 20px;
+                        background-color: var(--newColumnBg);
+                        & .columnName {
+                            display: flex;
+                            align-items: center;
+                            & .oval {
+                                width: 15px;
+                                height: 15px;
+                                border-radius: 30px;
+                                background-color: #49C4E5;
+                                margin: 20px 0 10px 0px;
+                            }
+                           & h5 {
+                                color: #828FA3;
+                                font-feature-settings: 'clig' off, 'liga' off;
+                                font-size: 12px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: normal;
+                                letter-spacing: 2.4px;
+                                margin: 20px 0 10px 15px;
+                            }
+                        }
+                        & .task {
+                            display: flex;
+                            flex-direction: column;
+                            border-radius: 8px;
+                            background: var(--taskBg);
+                            box-shadow: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
+                            padding: 23px 19px;
+                            margin: 10px 0;
+                            &:hover {
+                                cursor: pointer;
+                                h3 {
+                                    color: #635FC7;
+                                }
+                            }
+                            & h3 {
+                                color: var(--p-color);
+                                font-feature-settings: 'clig' off, 'liga' off;
+                                font-size: 15px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: normal;
+                                margin: 5px 0;
+                                max-width: 85%;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                            & p {
+                                color: #828FA3;
+                                font-feature-settings: 'clig' off, 'liga' off;
+                                font-size: 12px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: normal;
+                            }
+                        }
                     }
                     & .newColumn {
                         width: 100%;

@@ -1,5 +1,6 @@
 "use client"
 import { AddColumnContext } from '@/context/AddColumnContext'
+import { BoardsContext } from '@/context/BoardsContext';
 import React, {useContext, useState} from 'react'
 
 interface Subtask {
@@ -25,7 +26,7 @@ function AddColumn(props: addColumnProps) {
     const [addColumn, setAddColumn] = useContext(AddColumnContext)
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
-
+    const [boards, setBoards] = useContext(BoardsContext)
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
         newColumns.splice(index, 1);
@@ -64,6 +65,7 @@ function AddColumn(props: addColumnProps) {
                 <p>+ Add New Column</p>
             </div>
             <div className="createNewColumn" onClick={() => {
+                console.log(boards?.length)
                 props.handleNewColumn(props.boardIndex, columnsBoard)
                 setAddColumn(false)
             }}>

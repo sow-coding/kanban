@@ -6,7 +6,7 @@
   display: flex;
   border-radius: 0px 100px 100px 0px;
   align-items: center;
-  width: 75%;
+  width: 85%;
   padding: 12px 15px;
   margin: 15px 0;
 }
@@ -24,10 +24,21 @@
 }
 .boardStick:hover {
   cursor: pointer;
+  background-color: var(--boardStick);
+}
+.boardStick:hover p {
+  color: #635FC7;
 }
 
 .onBoardStick {
   background-color: #635FC7;
+}
+.onBoardStick:hover {
+  cursor: pointer !important;
+  background-color: #635FC7 !important;
+}
+.onBoardStick:hover p {
+  color: white !important;
 }
 
 .pOnBoardStick {

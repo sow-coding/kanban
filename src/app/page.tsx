@@ -19,6 +19,8 @@ import { EditTaskContext } from "@/context/EditTaskContext";
 import DeleteBoard from "@/components/deleteBoard/deleteBoard";
 import { DeleteBoardContext } from "@/context/DeleteBoardContext";
 import { OptionsContext } from "@/context/OptionsContext";
+import DeleteTask from "@/components/deleteTask/deleteTask";
+import { DeleteTaskContext } from "@/context/DeleteTaskContext";
 
 export default function Board() {
 
@@ -69,6 +71,15 @@ export default function Board() {
   const [options, setOptions] = useState<boolean>(false)
   const [deleteTask, setDeleteTask] = useState<boolean>(false)
 
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
     <BoardsContext.Provider value={[boards, setBoards]}>
@@ -81,7 +92,7 @@ export default function Board() {
     <EditTaskContext.Provider value={[editTask, setEditTask]}>
     <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
     <OptionsContext.Provider value={[options, setOptions]}>
-    <DeleteBoardContext.Provider value={[deleteTask, setDeleteTask]}>
+    <DeleteTaskContext.Provider value={[deleteTask, setDeleteTask]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -99,24 +110,22 @@ export default function Board() {
         {boards.map((board:Board) => (
           board.nameOfTheBoard === whichBoard ? board?.columns?.map((column:ColumnType, index:number) => (
             <div key={index} className="column">
-              <h6>{column.name}</h6>
-              <ul>
-                {column.tasks?.map((Task: Task, index: number) => (
-                  <li key={index} onClick={() => {
-                    setEditTask(true)
-                    setEditedTask(Task)
-                    setTaskIndex(index)
-                  }}>
-                    {Task.title}
-                  </li>
-                ))}
-              </ul>
+              <div className="columnName">
+              <div className="oval" style={{ backgroundColor: getRandomColor() }}></div>
+              <h5>{column.name} {`( ${column.tasks?.length} )`}</h5>
+              </div>
+              {column?.tasks?.map((Task:Task, index:number) => (
+                <div className="task" key={index}>
+                  <h3>{Task.title}</h3>
+                  <p>{`${Task.substasks?.length}`} substasks</p>
+                </div>
+              ))}
             </div>
           )) : null
         ))}
         {
           whichBoard !== "" ? <div className="newColumn" onClick={() => {
-            setAddColumn(true)
+            options === false && setAddColumn(true)
           }}>
               <h2>+ New Column</h2>
           </div>  : <div className="clickBoard">
@@ -131,8 +140,9 @@ export default function Board() {
       {editBoard && <EditBoard handleNewColumn={handleNewColumn} boardIndex={boardIndex} />}
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
+      {deleteTask && <DeleteTask />}
     </div>
-    </DeleteBoardContext.Provider>
+    </DeleteTaskContext.Provider>
     </OptionsContext.Provider>
     </DeleteBoardContext.Provider>
     </EditTaskContext.Provider>
