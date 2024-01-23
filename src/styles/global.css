@@ -8,6 +8,7 @@
 @import "../components/editTask/editTask.module.css";
 @import "../components/deleteBoard/deleteBoard.module.css";
 @import "../components/deleteTask/deleteTask.module.css";
+@import '../components/task/task.module.css';
 * {
   box-sizing: border-box;
 }
@@ -22,6 +23,7 @@
   --taskBg: #fff;
   --boardStick: #F3eff7;
   --border: #E4EBFA;
+  --cancel: #F3eff7;
 }
 
 [data-theme=dark] {
@@ -31,6 +33,7 @@
   --taskBg: #2B2C37;
   --boardStick: #fff;
   --border: #3E3F4E;
+  --cancel: #fff;
 }
 
 body {
@@ -97,6 +100,9 @@ body .board .kanbanApp .empty .addNewBoard p {
   color: white;
   margin: 5px 5px;
   text-align: center;
+}
+body .board .kanbanApp .justifyContent {
+  justify-content: space-evenly;
 }
 body .board .kanbanApp .columns {
   width: 100%;
@@ -198,6 +204,9 @@ body .board .kanbanApp .columns .newColumn h2 {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+body .board .kanbanApp .columns .newColumnNone {
+  display: none !important;
 }
 @keyframes shake {
   0%, 100% {

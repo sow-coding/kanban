@@ -1,6 +1,7 @@
 "use client"
 import { BoardsContext } from '@/context/BoardsContext';
 import { EditTaskContext } from '@/context/EditTaskContext'
+import { TaskContext } from '@/context/TaskContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
 import React, { useContext, useState } from 'react'
 
@@ -13,7 +14,7 @@ interface editTaskProps {
 interface Task {
     title: string;
     description: string;
-    substasks?: Subtask[]
+    subtasks?: Subtask[]
   }
   interface Board {
     nameOfTheBoard: string;
@@ -30,7 +31,7 @@ interface Task {
 
 function EditTask(props: editTaskProps) {
     const [editTask, setEditTask] = useContext(EditTaskContext)
-    const [subtasks, setSubtasks] = useState<Subtask[]>(props.editedTask.substasks ?? [])
+    const [subtasks, setSubtasks] = useState<Subtask[]>(props.editedTask.subtasks ?? [])
     const [boards, setBoards] = useContext(BoardsContext)
     const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
     const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
@@ -39,10 +40,11 @@ function EditTask(props: editTaskProps) {
     const [titleTask, setTitleTask] = useState<string>(props.editedTask.title)
     const [descriptionTask, setDescriptionTask] = useState<string>(props.editedTask.description)
     const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
+    const [task, setTask] = useContext(TaskContext)
     const newTask: Task = {
       title: titleTask,
       description: descriptionTask,
-      substasks: subtasksArray
+      subtasks: subtasksArray
     }
     const deleteSubtask = (index: number) => {
       const newSubtask = [...subtasks];
@@ -61,7 +63,7 @@ function EditTask(props: editTaskProps) {
         ...updatedBoards[boardIndex].columns[columnIndex].tasks[props.taskIndex],
         title: editedTask.title,
         description: editedTask.description,
-        substasks: editedTask.substasks
+        subtasks: editedTask.subtasks
       }
       
       setBoards(updatedBoards);
@@ -69,6 +71,7 @@ function EditTask(props: editTaskProps) {
     return (
     <div className="calc" onClick={() => {
         setEditTask(false)
+        setTask(false)
       }}>
         <div className='addTask' onClick={(e) => {
           e.stopPropagation()

@@ -1,8 +1,9 @@
 "use client"
 import { BoardsContext } from '@/context/BoardsContext'
 import { EditBoardContext } from '@/context/EditBoardContext';
+import { NewColumnContext } from '@/context/NewColumnContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 interface Subtask {
     name?: string;
@@ -31,7 +32,7 @@ function EditBoard(props: editBoardPros) {
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>(editColumn || [])
     const [columns, setColumns] = useState<ColumnType[]>(columnsBoard)
     const [lengthIncreased, setLengthIncreased] = useState(false);
-
+    const [newColumn, setNewColumn] = useContext(NewColumnContext)
     const deleteColumn = (index: number) => {
         const newColumns = [...columnsBoard];
         newColumns.splice(index, 1);

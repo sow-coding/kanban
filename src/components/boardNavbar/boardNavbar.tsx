@@ -7,15 +7,22 @@ import { AddTaskContext } from '@/context/addTaskContext'
 import { EditBoardContext } from '@/context/EditBoardContext'
 import { DeleteBoardContext } from '@/context/DeleteBoardContext'
 import { OptionsContext } from '@/context/OptionsContext'
+import { BoardsContext } from '@/context/BoardsContext'
+import { NewColumnContext } from '@/context/NewColumnContext'
 
+interface BoardNavbarProps {
+  boardIndex: number
+}
 
-function BoardNavbar() {
+function BoardNavbar(props: BoardNavbarProps) {
     const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
     const [navbarOff, setNavbarOff] = useContext(NavbarContext)
     const [addTask, setAddTask] = useContext(AddTaskContext)
     const [editBoard, setEditBoard] = useContext(EditBoardContext)
     const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
     const [options, setOptions] = useContext(OptionsContext)
+    const [boards, setBoards] = useContext(BoardsContext)
+    const [newColumn, setNewColumn] = useContext(NewColumnContext)
   return (
     <div className='boardNavbar' data-testid="boardNavbar" onClick={(e) => {e.stopPropagation()}}>
         <div className="boardNavbarLeft">
@@ -35,7 +42,9 @@ function BoardNavbar() {
             </svg>
         </div>
         <div className={`options ${options === false && 'none'}`}>
-              <div onClick={() => {setEditBoard(true)}}>
+              <div onClick={() => {
+                setEditBoard(true)
+                }}>
                 <h5 className='editBoardText'>Edit Board</h5>
               </div>
               <div onClick={() => {setDeleteBoard(true)}}>

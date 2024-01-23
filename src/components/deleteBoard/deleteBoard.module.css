@@ -56,7 +56,7 @@
 }
 .deleteBoard div .delete p {
   margin: 0 0;
-  color: var(--p-color);
+  color: #fff;
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
@@ -67,7 +67,7 @@
   justify-content: center;
   width: 45%;
   border-radius: 20px;
-  background-color: var(--p-color);
+  background-color: var(--cancel);
   padding: 8px 75px;
 }
 .deleteBoard div .cancel:hover {

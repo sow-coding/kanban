@@ -1,0 +1,191 @@
+.calc {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.taskContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  padding: 32px 32px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+.taskContainer .taskTitle {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.taskContainer .taskTitle h1 {
+  color: var(--p-color);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.taskContainer .taskTitle svg:hover {
+  cursor: pointer;
+}
+.taskContainer p {
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px; /* 176.923% */
+}
+.taskContainer .subtasks h6 {
+  color: var(--p-color);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.taskContainer .subtasks .subtask {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  padding: 0px 20px;
+  background-color: var(--taskBg);
+  border-radius: 4px;
+  margin: 7px 0;
+}
+.taskContainer .subtasks .subtask p {
+  color: var(--p-color);
+  margin-left: 15px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.taskContainer .taskOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--taskBg);
+  width: 25%;
+  position: fixed;
+  margin-top: 10px;
+  margin-right: 10px;
+  top: 10px;
+  right: 0;
+  max-width: 200px;
+}
+.taskContainer .taskOptions div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.taskContainer .taskOptions div:hover {
+  cursor: pointer;
+}
+.taskContainer .taskOptions div .editBoardText {
+  margin: 10px 10px;
+  color: #828FA3;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px; /* 176.923% */
+}
+.taskContainer .taskOptions div .deleteBoardText {
+  margin: 10px 10px;
+  color: #EA5555;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px; /* 176.923% */
+  margin-bottom: 20px;
+}
+.taskContainer .none {
+  display: none !important;
+}
+
+@media (max-width: 3000px) {
+  .taskContainer {
+    width: 25%;
+  }
+}
+@media (max-width: 2300px) {
+  .taskContainer {
+    width: 30%;
+  }
+}
+@media (max-width: 2000px) {
+  .taskContainer {
+    width: 33%;
+  }
+}
+@media (max-width: 1800px) {
+  .taskContainer {
+    width: 36%;
+  }
+}
+@media (max-width: 1600px) {
+  .taskContainer {
+    width: 38.5%;
+  }
+}
+@media (max-width: 1450px) {
+  .taskContainer {
+    width: 42%;
+  }
+}
+@media (max-width: 1300px) {
+  .taskContainer {
+    width: 44%;
+  }
+}
+@media (max-width: 1100px) {
+  .taskContainer {
+    width: 47%;
+  }
+}
+@media (max-width: 950px) {
+  .taskContainer {
+    width: 50%;
+  }
+}
+@media (max-width: 850px) {
+  .taskContainer {
+    width: 53%;
+  }
+}
+@media (max-width: 725px) {
+  .taskContainer {
+    width: 56%;
+  }
+}
+@media (max-width: 600px) {
+  .taskContainer {
+    width: 60%;
+  }
+}
+@media (max-width: 450px) {
+  .taskContainer {
+    width: 80%;
+  }
+}
+@media (max-width: 320px) {
+  .taskContainer {
+    width: 95%;
+  }
+}/*# sourceMappingURL=task.module.css.map */

@@ -8,6 +8,7 @@
 @import "../components/editTask/editTask.module.css";
 @import "../components/deleteBoard/deleteBoard.module.css";
 @import "../components/deleteTask/deleteTask.module.css";
+@import '../components/task/task.module.css';
 * {
     box-sizing: border-box;
     &:focus {
@@ -22,6 +23,7 @@
     --taskBg: #fff;
     --boardStick: #F3eff7;
     --border: #E4EBFA;
+    --cancel: #F3eff7;
 }
 
 [data-theme='dark'] {
@@ -31,6 +33,7 @@
     --taskBg: #2B2C37;
     --boardStick: #fff;
     --border: #3E3F4E;
+    --cancel: #fff;
 }
 
 body {
@@ -95,6 +98,9 @@ body {
                     }
                 }
             }
+                & .justifyContent {
+                    justify-content: space-evenly;
+                }
                 & .columns {
                     width: 100%;
                     max-width: 100%;
@@ -194,6 +200,9 @@ body {
                             font-weight: 700;
                             line-height: normal;
                         }
+                    }
+                    & .newColumnNone {
+                        display: none!important;
                     }                
                 }
             }

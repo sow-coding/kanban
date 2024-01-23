@@ -21,22 +21,25 @@ import { DeleteBoardContext } from "@/context/DeleteBoardContext";
 import { OptionsContext } from "@/context/OptionsContext";
 import DeleteTask from "@/components/deleteTask/deleteTask";
 import { DeleteTaskContext } from "@/context/DeleteTaskContext";
+import { NewColumnContext } from "@/context/NewColumnContext";
+import { TaskContext } from "@/context/TaskContext";
+import Task from "@/components/task/task";
 
 export default function Board() {
 
   interface Subtask {
-    name?: string;
+    name: string;
   }
   interface Task {
     title: string;
     description: string;
-    substasks?: Subtask[]
+    subtasks?: Subtask[];
+    doneNumber?: number;
   }
   interface ColumnType {
     name: string;
     tasks?: Task[]
   }
-
   interface Board {
     nameOfTheBoard: string;
     columns?: ColumnType[]
@@ -54,7 +57,7 @@ export default function Board() {
   const [editedTask, setEditedTask] = useState<Task>({
     title: "",
     description: "",
-    substasks: []
+    subtasks: []
   })
   const [deleteBoard, setDeleteBoard] = useState<boolean>(false)
   const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
@@ -70,14 +73,15 @@ export default function Board() {
   const [taskIndex, setTaskIndex] = useState<number>(0)
   const [options, setOptions] = useState<boolean>(false)
   const [deleteTask, setDeleteTask] = useState<boolean>(false)
-
+  const [newColumn, setNewColumn] = useState<boolean>(false)
+  const [task, setTask] = useState<boolean>(false)
+  const [taskDisplay, setTaskDisplay] = useState({
+    title: "",
+    description: ""
+  })
   const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    const colors = ["#49C4E5", "#8471F2", "#67E2AE", "#EA5555"];
+    return colors[Math.floor(Math.random() * colors.length)];
   };
 
   return (
@@ -93,12 +97,14 @@ export default function Board() {
     <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
     <OptionsContext.Provider value={[options, setOptions]}>
     <DeleteTaskContext.Provider value={[deleteTask, setDeleteTask]}>
+    <NewColumnContext.Provider value={[newColumn, setNewColumn]}>
+    <TaskContext.Provider value={[task, setTask]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
       <Navbar />
       <div className="kanbanApp" onClick={() => {setOptions(false)}}>
-      <BoardNavbar />
+      <BoardNavbar boardIndex={boardIndex}/>
       {boards.length === 0 ? <div className="empty">
         <h3>Create a new board to get started.</h3>
         <div className="addNewBoard" onClick={() => {
@@ -106,7 +112,7 @@ export default function Board() {
         }}>
           <p>+ Add New Board</p>
         </div>
-      </div> : <div className="columns">
+      </div> : <div className={`columns ${newColumn && "justifyContent"}`}>
         {boards.map((board:Board) => (
           board.nameOfTheBoard === whichBoard ? board?.columns?.map((column:ColumnType, index:number) => (
             <div key={index} className="column">
@@ -115,16 +121,19 @@ export default function Board() {
               <h5>{column.name} {`( ${column.tasks?.length} )`}</h5>
               </div>
               {column?.tasks?.map((Task:Task, index:number) => (
-                <div className="task" key={index}>
+                <div className="task" key={index} onClick={() => {
+                  setTaskDisplay(Task)
+                  setTask(true)
+                }}>
                   <h3>{Task.title}</h3>
-                  <p>{`${Task.substasks?.length}`} substasks</p>
+                  <p>{`${Task.doneNumber} of ${Task.subtasks?.length}`} substasks</p>
                 </div>
               ))}
             </div>
           )) : null
         ))}
         {
-          whichBoard !== "" ? <div className="newColumn" onClick={() => {
+          whichBoard !== "" ? <div className={`newColumn ${newColumn && "newColumnNone"}`} onClick={() => {
             options === false && setAddColumn(true)
           }}>
               <h2>+ New Column</h2>
@@ -134,6 +143,7 @@ export default function Board() {
         }
       </div>}
       </div>
+      {task && <Task taskDisplay={taskDisplay} boardIndex={boardIndex} taskIndex={taskIndex} />}
       {addBoard && <AddBoard />}
       {addColumn && <AddColumn handleNewColumn={handleNewColumn} boardIndex={boardIndex}/>}
       {addTask && <AddNewTask boardIndex={boardIndex}/>}
@@ -142,6 +152,8 @@ export default function Board() {
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
       {deleteTask && <DeleteTask />}
     </div>
+    </TaskContext.Provider>
+    </NewColumnContext.Provider>
     </DeleteTaskContext.Provider>
     </OptionsContext.Provider>
     </DeleteBoardContext.Provider>

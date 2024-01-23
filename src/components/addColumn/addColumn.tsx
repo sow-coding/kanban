@@ -1,6 +1,7 @@
 "use client"
 import { AddColumnContext } from '@/context/AddColumnContext'
 import { BoardsContext } from '@/context/BoardsContext';
+import { NewColumnContext } from '@/context/NewColumnContext';
 import React, {useContext, useState} from 'react'
 
 interface Subtask {
@@ -32,6 +33,7 @@ function AddColumn(props: addColumnProps) {
         newColumns.splice(index, 1);
         setColumns(newColumns);
     };
+    const [newColumn, setNewColumn] = useContext(NewColumnContext)
 
     return (
     <div className='calc' onClick={() => {
@@ -65,8 +67,12 @@ function AddColumn(props: addColumnProps) {
                 <p>+ Add New Column</p>
             </div>
             <div className="createNewColumn" onClick={() => {
-                console.log(boards?.length)
-                props.handleNewColumn(props.boardIndex, columnsBoard)
+                props.handleNewColumn(props.boardIndex, columnsBoard);
+                if (boards[props.boardIndex].columns.length === 4) {
+                    setNewColumn(true)
+                } else {
+                    setNewColumn(false)
+                } 
                 setAddColumn(false)
             }}>
                 <p>Create New Column</p>

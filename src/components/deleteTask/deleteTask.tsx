@@ -15,7 +15,7 @@ function DeleteTask() {
             <p>Are you sure you want to delete the ‘Build settings UI’ task and its subtasks? This action cannot be reversed.</p>
             <div className="deleteTaskButtons">
                 <div className="delete" onClick={() => {
-
+                    
                 }}>
                     <p>Delete</p>
                 </div>
