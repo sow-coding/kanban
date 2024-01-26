@@ -2,12 +2,14 @@
 import { BoardsContext } from '@/context/BoardsContext';
 import { DeleteTaskContext } from '@/context/DeleteTaskContext';
 import { EditTaskContext } from '@/context/EditTaskContext';
+import { SubtaskDoneNumberContext } from '@/context/SubtaskDoneNumber';
 import { TaskContext } from '@/context/TaskContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 interface Subtask {
   name?: string;
+  done: boolean;
 }
 interface Task {
   title: string;
@@ -36,40 +38,52 @@ function Task(props:taskProps) {
   const [boards, setBoards] = useContext(BoardsContext)
   const [taskOptions, setTaskOptions] = useState(false)
   const [editTask, setEditTask] = useContext(EditTaskContext)
-  const [deleteTAsk, setDeleteTask] = useContext(DeleteTaskContext)
+  const [deleteTask, setDeleteTask] = useContext(DeleteTaskContext)
   const [subtaskChecked, setSubtaskChecked] = useState<boolean[]>(Array(props.taskDisplay.subtasks?.length).fill(false));
   const [subtasksDoneNumber, setSubtasksDoneNumber] = useState<number>(0)
-  const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
   const[subtaskIndex, setSubtaskIndex] = useState<number>(0)
+  const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
+  const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
+  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
+  const columnIndex :number = boards[props.boardIndex]?.columns.findIndex(
+    (column: ColumnType) => column.name === actualStatus
+  )
   const toggleSubtask = (index: number) => {
     const newSubtaskChecked = [...subtaskChecked];
     newSubtaskChecked[index] = !newSubtaskChecked[index];
     setSubtaskChecked(newSubtaskChecked);
+    localStorage.setItem(`subtaskChecked_${props.taskIndex}`, JSON.stringify(newSubtaskChecked));
 
     if (newSubtaskChecked[index]) {
       setSubtasksDoneNumber(subtasksDoneNumber + 1);
-      /*const updatedBoards: Board[] = [...boards];
+      const updatedBoards: Board[] = [...boards];
       const columnIndex :number = updatedBoards[props.boardIndex]?.columns.findIndex(
         (column) => column.name === actualStatus
       )
       updatedBoards[props.boardIndex].columns[columnIndex].tasks[props.taskIndex] = {
         ...updatedBoards[props.boardIndex].columns[columnIndex].tasks[props.taskIndex], 
-        doneNumber: subtasksDoneNumber
+        doneNumber: subtasksDoneNumber + 1
       }
-      setBoards(updatedBoards);*/    
+      setBoards(updatedBoards);
     } else {
       setSubtasksDoneNumber(subtasksDoneNumber - 1);
-      /*const updatedBoards: Board[] = [...boards];
+      const updatedBoards: Board[] = [...boards];
       const columnIndex :number = updatedBoards[props.boardIndex]?.columns.findIndex(
         (column) => column.name === actualStatus
       )
       updatedBoards[props.boardIndex].columns[columnIndex].tasks[props.taskIndex] = {
         ...updatedBoards[props.boardIndex].columns[columnIndex].tasks[props.taskIndex], 
-        doneNumber: subtasksDoneNumber
+        doneNumber: subtasksDoneNumber - 1
       }
-      setBoards(updatedBoards); */   
+      setBoards(updatedBoards);
     }
   };
+  useEffect(() => {
+    const storedSubtaskChecked = localStorage.getItem(`subtaskChecked_${props.taskIndex}`);
+    if (storedSubtaskChecked) {
+      setSubtaskChecked(JSON.parse(storedSubtaskChecked));
+    }
+  }, [props.taskIndex]);
 
   return (
     <div className="calc" onClick={() => {
@@ -100,11 +114,10 @@ function Task(props:taskProps) {
       </div>
       <p>{props.taskDisplay.description}</p>
       <div className="subtasks">
-        <h6>Subtasks {`( ${subtasksDoneNumber} of ${props.taskDisplay.subtasks?.length})`}</h6>
+        <h6>Subtasks {`( ${subtasksDoneNumber} of ${props.taskDisplay.subtasks?.length} )`}</h6>
         {props.taskDisplay.subtasks?.map((subtask, index) => (
-          <div className='subtask' key={index} onClick={() => {
+          <div className={`subtask`} key={index} onClick={() => {
             toggleSubtask(index)
-            setSubtaskIndex(index)
             }            
             }>
             <input type="checkbox" name="subtask" checked={subtaskChecked[index]}/>

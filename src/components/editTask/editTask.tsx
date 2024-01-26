@@ -141,6 +141,7 @@ function EditTask(props: editTaskProps) {
         <div className="saveChanges" onClick={() => {
           saveChanges(props.boardIndex, newTask)
           setEditTask(false)
+          setTask(false)
         }}>
           <p>Save Changes</p>
         </div>

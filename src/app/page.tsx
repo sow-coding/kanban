@@ -123,10 +123,11 @@ export default function Board() {
               {column?.tasks?.map((Task:Task, index:number) => (
                 <div className="task" key={index} onClick={() => {
                   setTaskDisplay(Task)
+                  setTaskIndex(index)
                   setTask(true)
                 }}>
                   <h3>{Task.title}</h3>
-                  <p>{`${Task.doneNumber} of ${Task.subtasks?.length}`} substasks</p>
+                  <p>{`${Task.doneNumber === undefined ? "0" : Task.doneNumber} of ${Task.subtasks?.length}`} substasks</p>
                 </div>
               ))}
             </div>

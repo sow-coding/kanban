@@ -10,6 +10,10 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.subtaskNone {
+  display: none !important;
+}
+
 .taskContainer {
   position: fixed;
   top: 50%;
