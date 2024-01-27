@@ -151,7 +151,7 @@ export default function Board() {
       {editBoard && <EditBoard handleNewColumn={handleNewColumn} boardIndex={boardIndex} />}
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
-      {deleteTask && <DeleteTask />}
+      {deleteTask && <DeleteTask taskIndex={taskIndex} boardIndex={boardIndex} />}
     </div>
     </TaskContext.Provider>
     </NewColumnContext.Provider>

@@ -2,7 +2,6 @@
 import { BoardsContext } from '@/context/BoardsContext';
 import { DeleteTaskContext } from '@/context/DeleteTaskContext';
 import { EditTaskContext } from '@/context/EditTaskContext';
-import { SubtaskDoneNumberContext } from '@/context/SubtaskDoneNumber';
 import { TaskContext } from '@/context/TaskContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
 import React, { useContext, useState, useEffect } from 'react'
@@ -77,7 +76,8 @@ function Task(props:taskProps) {
       }
       setBoards(updatedBoards);
     }
-  };
+  }
+  console.log(subtasksDoneNumber)
   useEffect(() => {
     const storedSubtaskChecked = localStorage.getItem(`subtaskChecked_${props.taskIndex}`);
     if (storedSubtaskChecked) {
