@@ -99,9 +99,9 @@ function EditBoard(props: editBoardPros) {
             }}>
                 <p>+ Add New Column</p>
             </div>
-            <div className="saveChanges" onClick={() => {
-                saveChanges()
-                setWhichBoard(nameBoard)
+            <div className={`saveChanges ${boards[props.boardIndex].columns.length === 4 && "addColumnDisable"} `} onClick={() => {
+                columns.length === 5 ?  alert('4 columns max :)'): saveChanges()
+                columns.length === 5 ?  "" : setWhichBoard(nameBoard)
             }}>
                 <p>Save Changes</p>
             </div>

@@ -30,12 +30,12 @@ function BoardNavbar(props: BoardNavbarProps) {
         <h1>{welkeBoard}</h1>
         </div>
         <div className="navigation">
-            <div className="addNewTask" onClick={() => {
-              welkeBoard !== "" ? setAddTask(true) : alert('non')
+            <div className={`addNewTask ${(boards.length === 0 || boards[0].columns.length === 0) && "addNewTaskDisable"}`} onClick={() => {
+              welkeBoard !== "" && setAddTask(true) 
             }}>
                 <p>+<span className='newTaskSpan'> Add New Task</span></p>
             </div>
-            <svg onClick={() => {setOptions(true)}} xmlns="http://www.w3.org/2000/svg" width="5" height="20" viewBox="0 0 5 20" fill="none">
+            <svg onClick={() => {boards.length !== 0 && setOptions(true)}} xmlns="http://www.w3.org/2000/svg" width="5" height="20" viewBox="0 0 5 20" fill="none">
             <circle cx="2.30769" cy="2.30769" r="2.30769" fill="#828FA3"/>
             <circle cx="2.30769" cy="10" r="2.30769" fill="#828FA3"/>
             <circle cx="2.30769" cy="17.6923" r="2.30769" fill="#828FA3"/>

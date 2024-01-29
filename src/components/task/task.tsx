@@ -1,4 +1,5 @@
 "use client"
+import { ActualStatusContext } from '@/context/ActualStatusContext';
 import { BoardsContext } from '@/context/BoardsContext';
 import { DeleteTaskContext } from '@/context/DeleteTaskContext';
 import { EditTaskContext } from '@/context/EditTaskContext';
@@ -40,18 +41,16 @@ function Task(props:taskProps) {
   const [deleteTask, setDeleteTask] = useContext(DeleteTaskContext)
   const [subtaskChecked, setSubtaskChecked] = useState<boolean[]>(Array(props.taskDisplay.subtasks?.length).fill(false));
   const [subtasksDoneNumber, setSubtasksDoneNumber] = useState<number>(0)
-  const[subtaskIndex, setSubtaskIndex] = useState<number>(0)
   const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
-  const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
-  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
-  const columnIndex :number = boards[props.boardIndex]?.columns.findIndex(
-    (column: ColumnType) => column.name === actualStatus
-  )
+  const [actualStatus, setActualStatus] = useContext(ActualStatusContext)
+
+//regler prblms checkboxs qui apres a render du component Task ne sont plus checked alors que cheked 
+//auparavant !  
+  
   const toggleSubtask = (index: number) => {
     const newSubtaskChecked = [...subtaskChecked];
     newSubtaskChecked[index] = !newSubtaskChecked[index];
     setSubtaskChecked(newSubtaskChecked);
-    localStorage.setItem(`subtaskChecked_${props.taskIndex}`, JSON.stringify(newSubtaskChecked));
 
     if (newSubtaskChecked[index]) {
       setSubtasksDoneNumber(subtasksDoneNumber + 1);
@@ -77,13 +76,7 @@ function Task(props:taskProps) {
       setBoards(updatedBoards);
     }
   }
-  console.log(subtasksDoneNumber)
-  useEffect(() => {
-    const storedSubtaskChecked = localStorage.getItem(`subtaskChecked_${props.taskIndex}`);
-    if (storedSubtaskChecked) {
-      setSubtaskChecked(JSON.parse(storedSubtaskChecked));
-    }
-  }, [props.taskIndex]);
+
 
   return (
     <div className="calc" onClick={() => {
@@ -114,7 +107,7 @@ function Task(props:taskProps) {
       </div>
       <p>{props.taskDisplay.description}</p>
       <div className="subtasks">
-        <h6>Subtasks {`( ${subtasksDoneNumber} of ${props.taskDisplay.subtasks?.length} )`}</h6>
+        <h6>Subtasks {`( ${props.taskDisplay.doneNumber === undefined ? subtasksDoneNumber : props.taskDisplay.doneNumber} of ${props.taskDisplay.subtasks?.length} )`}</h6>
         {props.taskDisplay.subtasks?.map((subtask, index) => (
           <div className={`subtask`} key={index} onClick={() => {
             toggleSubtask(index)

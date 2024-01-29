@@ -24,6 +24,7 @@ import { DeleteTaskContext } from "@/context/DeleteTaskContext";
 import { NewColumnContext } from "@/context/NewColumnContext";
 import { TaskContext } from "@/context/TaskContext";
 import Task from "@/components/task/task";
+import { ActualStatusContext } from "@/context/ActualStatusContext";
 
 export default function Board() {
 
@@ -46,7 +47,7 @@ export default function Board() {
   }
 
   const [boards, setBoards] = useState<Board[]>([])
-  const [theme, setTheme] = useState<boolean>(true)
+  const [theme, setTheme] = useState<boolean>(false)
   const [addBoard, setAddBoard] = useState<boolean>(false)
   const [navbarOff, setNavbarOff] = useState<boolean>(false)
   const [addColumn, setAddColumn] = useState<boolean>(false)
@@ -83,6 +84,7 @@ export default function Board() {
     const colors = ["#49C4E5", "#8471F2", "#67E2AE", "#EA5555"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
+  const [actualStatus, setActualStatus] = useState("")
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
@@ -99,6 +101,7 @@ export default function Board() {
     <DeleteTaskContext.Provider value={[deleteTask, setDeleteTask]}>
     <NewColumnContext.Provider value={[newColumn, setNewColumn]}>
     <TaskContext.Provider value={[task, setTask]}>
+    <ActualStatusContext.Provider value={[actualStatus, setActualStatus]}>
     <div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
@@ -118,12 +121,13 @@ export default function Board() {
             <div key={index} className="column">
               <div className="columnName">
               <div className="oval" style={{ backgroundColor: getRandomColor() }}></div>
-              <h5>{column.name} {`( ${column.tasks?.length} )`}</h5>
+              <h5>{column.name} {`( ${column.tasks?.length === undefined ? "0" : column.tasks.length} )`}</h5>
               </div>
               {column?.tasks?.map((Task:Task, index:number) => (
-                <div className="task" key={index} onClick={() => {
+                <div className={`task`} key={index} onClick={(e) => {
                   setTaskDisplay(Task)
                   setTaskIndex(index)
+                  setActualStatus(column.name)
                   setTask(true)
                 }}>
                   <h3>{Task.title}</h3>
@@ -153,6 +157,7 @@ export default function Board() {
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
       {deleteTask && <DeleteTask taskIndex={taskIndex} boardIndex={boardIndex} />}
     </div>
+    </ActualStatusContext.Provider>
     </TaskContext.Provider>
     </NewColumnContext.Provider>
     </DeleteTaskContext.Provider>
