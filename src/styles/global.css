@@ -247,4 +247,10 @@ body .clickBoard h1 {
   color: var(--p-color);
   animation: shake 1.5s ease-in-out infinite, colorChange 6s ease-in-out infinite;
   text-align: center;
+}
+
+@media (max-width: 700px) {
+  .newColumn {
+    display: none !important;
+  }
 }/*# sourceMappingURL=global.css.map */

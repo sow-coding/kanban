@@ -251,3 +251,8 @@ body {
         }
     }
 
+@media (max-width: 700px) {
+    .newColumn {
+        display: none!important;
+    }
+}

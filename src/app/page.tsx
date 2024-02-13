@@ -102,7 +102,7 @@ export default function Board() {
     <NewColumnContext.Provider value={[newColumn, setNewColumn]}>
     <TaskContext.Provider value={[task, setTask]}>
     <ActualStatusContext.Provider value={[actualStatus, setActualStatus]}>
-    <div data-testid="board" className="board" data-theme={
+    {/*<div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
       <Navbar />
@@ -156,7 +156,8 @@ export default function Board() {
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
       {deleteTask && <DeleteTask taskIndex={taskIndex} boardIndex={boardIndex} />}
-    </div>
+      </div>*/}
+    {<h1>in update, {`it's`} coming soon</h1>}
     </ActualStatusContext.Provider>
     </TaskContext.Provider>
     </NewColumnContext.Provider>

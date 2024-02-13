@@ -135,12 +135,17 @@
 }
 @media (max-width: 750px) {
   .navbar {
-    width: 46.5%;
+    width: 48%;
+  }
+}
+@media (max-width: 675px) {
+  .navbar {
+    width: 51%;
   }
 }
 @media (max-width: 600px) {
   .navbar {
-    width: 48%;
+    width: 54%;
   }
 }
 @media (max-width: 599px) {
