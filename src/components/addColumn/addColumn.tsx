@@ -1,27 +1,13 @@
 "use client"
+import { ColumnType } from '@/app/page';
 import { AddColumnContext } from '@/context/AddColumnContext'
 import { BoardsContext } from '@/context/BoardsContext';
 import { NewColumnContext } from '@/context/NewColumnContext';
 import React, {useContext, useState} from 'react'
-
-interface Subtask {
-    name?: string;
-  }
-
-interface ColumnType {
-    name: string;
-    tasks?: Task[]
-  }
-  interface Task {
-    title: string;
-    description: string;
-    substaks: Subtask[]
-  }
 interface addColumnProps {
     boardIndex: number;
     handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
 }
-
 
 function AddColumn(props: addColumnProps) {
     const [addColumn, setAddColumn] = useContext(AddColumnContext)

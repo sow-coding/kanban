@@ -1,18 +1,9 @@
 "use client"
+import { ColumnType } from "@/app/page";
 import { AddBoardContext } from "@/context/AddBoardContext";
 import { BoardsContext } from "@/context/BoardsContext";
 import { WhichBoardContext } from "@/context/WhichBoardContext";
 import { useContext, useState, useRef } from "react"
-
-interface ColumnType {
-    name: string;
-    tasks?: Task[];
-  }
-  interface Task {
-    title: string;
-    description: string;
-    substasks: string[]
-  }
 
 function AddBoard() {
     const [columns, setColumns] = useState<string[]>(["first column"])

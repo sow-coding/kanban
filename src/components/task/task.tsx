@@ -46,7 +46,6 @@ function Task(props:taskProps) {
 
 //regler prblms checkboxs qui apres a render du component Task ne sont plus checked alors que cheked 
 //auparavant !
-//RESPONSIVE IMPECCABLE !!!!  
   
   const toggleSubtask = (index: number) => {
     const newSubtaskChecked = [...subtaskChecked];

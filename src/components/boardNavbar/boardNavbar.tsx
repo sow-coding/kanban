@@ -31,11 +31,11 @@ function BoardNavbar(props: BoardNavbarProps) {
         </div>
         <div className="navigation">
             <div className={`addNewTask ${(boards.length === 0 || boards[0].columns.length === 0) && "addNewTaskDisable"}`} onClick={() => {
-              welkeBoard !== "" && setAddTask(true) 
+              welkeBoard !== "" ? setAddTask(true) : alert("Create at least one column to do add a new task !")
             }}>
                 <p>+<span className='newTaskSpan'> Add New Task</span></p>
             </div>
-            <svg onClick={() => {boards.length !== 0 && setOptions(true)}} xmlns="http://www.w3.org/2000/svg" width="5" height="20" viewBox="0 0 5 20" fill="none">
+            <svg onClick={() => {boards.length !== 0 ? setOptions(true) : alert("Create at least one column to do that !")}} xmlns="http://www.w3.org/2000/svg" width="5" height="20" viewBox="0 0 5 20" fill="none">
             <circle cx="2.30769" cy="2.30769" r="2.30769" fill="#828FA3"/>
             <circle cx="2.30769" cy="10" r="2.30769" fill="#828FA3"/>
             <circle cx="2.30769" cy="17.6923" r="2.30769" fill="#828FA3"/>

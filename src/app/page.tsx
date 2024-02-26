@@ -26,25 +26,30 @@ import { TaskContext } from "@/context/TaskContext";
 import Task from "@/components/task/task";
 import { ActualStatusContext } from "@/context/ActualStatusContext";
 
+export interface Subtask {
+  name: string;
+}
+export interface TaskType {
+  title: string;
+  description: string;
+  subtasks?: Subtask[];
+  doneNumber?: number;
+}
+export interface ColumnType {
+  name: string;
+  tasks?: TaskType[]
+}
+export interface Board {
+  nameOfTheBoard: string;
+  columns?: ColumnType[]
+}
+
 export default function Board() {
 
-  interface Subtask {
-    name: string;
-  }
-  interface Task {
-    title: string;
-    description: string;
-    subtasks?: Subtask[];
-    doneNumber?: number;
-  }
-  interface ColumnType {
-    name: string;
-    tasks?: Task[]
-  }
-  interface Board {
-    nameOfTheBoard: string;
-    columns?: ColumnType[]
-  }
+  //refaire context
+  //enlever bug column color avec getRandomColor
+  //rajouter logo version tel + menu calc + barrer task when done + reduire taille btn addNewTask
+  //enlever zoom iphone
 
   const [boards, setBoards] = useState<Board[]>([])
   const [theme, setTheme] = useState<boolean>(false)
@@ -102,7 +107,7 @@ export default function Board() {
     <NewColumnContext.Provider value={[newColumn, setNewColumn]}>
     <TaskContext.Provider value={[task, setTask]}>
     <ActualStatusContext.Provider value={[actualStatus, setActualStatus]}>
-    {/*<div data-testid="board" className="board" data-theme={
+    {<div data-testid="board" className="board" data-theme={
       theme ? "dark" : "light"
     }>
       <Navbar />
@@ -123,8 +128,8 @@ export default function Board() {
               <div className="oval" style={{ backgroundColor: getRandomColor() }}></div>
               <h5>{column.name} {`( ${column.tasks?.length === undefined ? "0" : column.tasks.length} )`}</h5>
               </div>
-              {column?.tasks?.map((Task:Task, index:number) => (
-                <div className={`task`} key={index} onClick={(e) => {
+              {column?.tasks?.map((Task:TaskType, index:number) => (
+                <div className={`task`} key={index} onClick={() => {
                   setTaskDisplay(Task)
                   setTaskIndex(index)
                   setActualStatus(column.name)
@@ -156,8 +161,7 @@ export default function Board() {
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
       {deleteTask && <DeleteTask taskIndex={taskIndex} boardIndex={boardIndex} />}
-      </div>*/}
-    {<h1>in update, {`it's`} coming soon</h1>}
+      </div>}
     </ActualStatusContext.Provider>
     </TaskContext.Provider>
     </NewColumnContext.Provider>

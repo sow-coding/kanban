@@ -55,10 +55,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
     position: relative;
     border-bottom: 1px solid var(--border);
-    padding: 0px 0 20px 0;
+    background-color: var(--taskBg);
+    padding: 20px 0 20px 0;
     & .boardNavbarLeft {
         display: flex;
         align-items: center;
@@ -131,7 +131,7 @@
 
 @media (max-width: 599px) {
     .boardNavbar {
-        padding: 0px 24px 20px 24px;
+        padding: 20px 14px 20px 14px;
     }
 }
 
@@ -140,3 +140,16 @@
         display: none;
     }
 }
+
+@media (max-width: 920px) {
+    .options {
+        width: 30%;
+    }
+}
+
+@media (max-width: 500px) {
+    .options {
+        width: 40%;
+    }
+}
+

@@ -203,77 +203,82 @@
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
-  line-height: 23px; /* 176.923% */
+  line-height: 23px;
   margin: 0 0;
 }
 
 @media (max-width: 3000px) {
   .addTask {
-    width: 25% !important;
+    width: 25%;
   }
 }
 @media (max-width: 2300px) {
   .addTask {
-    width: 30% !important;
+    width: 30%;
   }
 }
 @media (max-width: 2000px) {
   .addTask {
-    width: 33% !important;
-  }
-}
-@media (max-width: 1800px) {
-  .addColumn {
-    width: 36% !important;
+    width: 33%;
   }
 }
 @media (max-width: 1600px) {
   .addTask {
-    width: 38.5% !important;
+    width: 38.5%;
   }
 }
 @media (max-width: 1450px) {
   .addTask {
-    width: 42% !important;
+    width: 42%;
   }
 }
 @media (max-width: 1300px) {
   .addTask {
-    width: 44% !important;
+    width: 44%;
   }
 }
 @media (max-width: 1100px) {
   .addTask {
-    width: 47% !important;
+    width: 47%;
   }
 }
 @media (max-width: 950px) {
   .addTask {
-    width: 50% !important;
+    width: 50%;
   }
 }
 @media (max-width: 850px) {
   .addTask {
-    width: 53% !important;
+    width: 53%;
   }
 }
 @media (max-width: 725px) {
   .addTask {
-    width: 56% !important;
+    width: 56%;
   }
 }
 @media (max-width: 600px) {
   .addTask {
-    width: 60% !important;
+    width: 60%;
   }
 }
 @media (max-width: 450px) {
   .addTask {
-    width: 80% !important;
+    width: 80%;
   }
 }
 @media (max-width: 320px) {
   .addTask {
-    width: 95% !important;
+    width: 95%;
+  }
+}
+@media (max-width: 920px) {
+  .taskContainer .taskOptions {
+    width: 30%;
+  }
+}
+@media (max-width: 500px) {
+  .taskContainer .taskOptions {
+    width: 40%;
   }
 }/*# sourceMappingURL=addNewTask.module.css.map */

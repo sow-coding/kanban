@@ -10,7 +10,6 @@ interface editTaskProps {
     editedTask: Task;
     taskIndex: number;
 }
-
 interface Task {
     title: string;
     description: string;

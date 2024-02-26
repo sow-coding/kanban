@@ -1,4 +1,5 @@
 "use client"
+import { ColumnType } from '@/app/page';
 import { BoardsContext } from '@/context/BoardsContext'
 import { DeleteTaskContext } from '@/context/DeleteTaskContext'
 import { TaskContext } from '@/context/TaskContext';
@@ -8,22 +9,7 @@ import React, {useContext, useState} from 'react'
 interface deleteTaskProps {
     boardIndex: number;
     taskIndex: number;
-}
-interface Subtask {
-    name?: string;
-    done: boolean;
-  }
-  interface Task {
-    title: string;
-    description: string;
-    subtasks?: Subtask[];
-    doneNumber?: number;
-  }
-  interface ColumnType {
-    name: string;
-    tasks: Task[]
-  }
-  
+} 
   interface Board {
     nameOfTheBoard: string;
     columns: ColumnType[]

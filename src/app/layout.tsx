@@ -6,7 +6,7 @@ const kanbanFont = Plus_Jakarta_Sans ({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Kanban',
-  description: 'A SaaS to manage your business and your time',
+  description: 'A SaaS to manage your business and your time'
 }
 
 export default function RootLayout({

@@ -1,24 +1,13 @@
 "use client"
+import { ColumnType, Subtask, TaskType } from '@/app/page'
 import { BoardsContext } from '@/context/BoardsContext'
 import { WhichBoardContext } from '@/context/WhichBoardContext'
 import { AddTaskContext } from '@/context/addTaskContext'
 import React, { useContext, useState } from 'react'
 
-interface Task {
-  title: string;
-  description: string;
-  subtasks?: Subtask[]
-}
 interface Board {
   nameOfTheBoard: string;
   columns: ColumnType[]
-}
-interface ColumnType {
-  name: string;
-  tasks: Task[]
-}
-interface Subtask {
-  name?: string;
 }
 interface addNewTaskProps {
   boardIndex: number;
@@ -42,7 +31,7 @@ function AddNewTask(props: addNewTaskProps) {
     setSubtasks(newSubtask);
   };
 
-  const handleNewTask = (boardIndex:number, newTask: Task) => {
+  const handleNewTask = (boardIndex:number, newTask: TaskType) => {
 
     const updatedBoards: Board[] = [...boards];
 

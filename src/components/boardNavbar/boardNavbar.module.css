@@ -54,10 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
   position: relative;
   border-bottom: 1px solid var(--border);
-  padding: 0px 0 20px 0;
+  background-color: var(--taskBg);
+  padding: 20px 0 20px 0;
 }
 .boardNavbar .boardNavbarLeft {
   display: flex;
@@ -119,11 +119,21 @@
 }
 @media (max-width: 599px) {
   .boardNavbar {
-    padding: 0px 24px 20px 24px;
+    padding: 20px 14px 20px 14px;
   }
 }
 @media (max-width: 480px) {
   .newTaskSpan {
     display: none;
+  }
+}
+@media (max-width: 920px) {
+  .options {
+    width: 30%;
+  }
+}
+@media (max-width: 500px) {
+  .options {
+    width: 40%;
   }
 }/*# sourceMappingURL=boardNavbar.module.css.map */

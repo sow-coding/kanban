@@ -1,22 +1,11 @@
 "use client"
+import { ColumnType } from '@/app/page';
 import { BoardsContext } from '@/context/BoardsContext'
 import { EditBoardContext } from '@/context/EditBoardContext';
 import { NewColumnContext } from '@/context/NewColumnContext';
 import { WhichBoardContext } from '@/context/WhichBoardContext';
 import React, { useState, useContext, useEffect } from 'react'
 
-interface Subtask {
-    name?: string;
-  }
-interface ColumnType {
-    name: string;
-    tasks?: Task[]
-  }
-  interface Task {
-    title: string;
-    description: string;
-    substaks: Subtask[]
-  }
   interface editBoardPros {
     handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
     boardIndex: number;

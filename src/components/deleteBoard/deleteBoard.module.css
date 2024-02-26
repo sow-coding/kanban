@@ -141,6 +141,13 @@
   .deleteBoard {
     width: 60%;
   }
+  .deleteBoard .deleteBoardButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .deleteBoard .deleteBoardButtons div {
+    margin: 10px 0;
+  }
 }
 @media (max-width: 450px) {
   .deleteBoard {

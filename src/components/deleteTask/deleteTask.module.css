@@ -141,6 +141,13 @@
   .deleteTask {
     width: 60%;
   }
+  .deleteTask .deleteTaskButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .deleteTask .deleteTaskButtons div {
+    margin: 10px 0;
+  }
 }
 @media (max-width: 450px) {
   .deleteTask {

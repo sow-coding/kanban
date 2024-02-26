@@ -8,10 +8,6 @@ interface deleteBoardProp {
     boardIndex: number
 }
 
-interface Board {
-    nameOfTheBoard: string;
-}
-
 function DeleteBoard(props: deleteBoardProp) {
     const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
     const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
