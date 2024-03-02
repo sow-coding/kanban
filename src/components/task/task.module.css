@@ -123,6 +123,11 @@
   display: none !important;
 }
 
+.subtaskChecked {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 @media (max-width: 3000px) {
   .taskContainer {
     width: 25%;

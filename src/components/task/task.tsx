@@ -1,51 +1,33 @@
 "use client"
-import { ActualStatusContext } from '@/context/ActualStatusContext';
-import { BoardsContext } from '@/context/BoardsContext';
-import { DeleteTaskContext } from '@/context/DeleteTaskContext';
-import { EditTaskContext } from '@/context/EditTaskContext';
-import { TaskContext } from '@/context/TaskContext';
-import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, { useContext, useState, useEffect } from 'react'
+import { Subtask, TaskType } from '@/app/page';
+import { useActualStatusContext } from '@/context/ActualStatusContext';
+import { useBoardsContext } from '@/context/BoardsContext';
+import { useDeleteTaskContext } from '@/context/DeleteTaskContext';
+import { useEditTaskContext } from '@/context/EditTaskContext';
+import { useTaskContext } from '@/context/TaskContext';
+import React, { useState } from 'react'
 
-interface Subtask {
-  name?: string;
-  done: boolean;
-}
-interface Task {
+interface TaskCompletedType {
   title: string;
   description: string;
-  subtasks?: Subtask[];
+  subtasks: Subtask[];
   doneNumber?: number;
 }
-interface ColumnType {
-  name: string;
-  tasks: Task[]
-}
-
-interface Board {
-  nameOfTheBoard: string;
-  columns: ColumnType[]
-}
-
 interface taskProps {
-  taskDisplay: Task;
+  taskDisplay: TaskType;
   boardIndex: number;
   taskIndex: number;
 }
 
 function Task(props:taskProps) {
-  const [task, setTask] = useContext(TaskContext)
-  const [boards, setBoards] = useContext(BoardsContext)
+  const {setTask} = useTaskContext()
+  const {boards, setBoards} = useBoardsContext()
   const [taskOptions, setTaskOptions] = useState(false)
-  const [editTask, setEditTask] = useContext(EditTaskContext)
-  const [deleteTask, setDeleteTask] = useContext(DeleteTaskContext)
+  const {setEditTask} = useEditTaskContext()
+  const {setDeleteTask} = useDeleteTaskContext()
   const [subtaskChecked, setSubtaskChecked] = useState<boolean[]>(Array(props.taskDisplay.subtasks?.length).fill(false));
   const [subtasksDoneNumber, setSubtasksDoneNumber] = useState<number>(0)
-  const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
-  const [actualStatus, setActualStatus] = useContext(ActualStatusContext)
-
-//regler prblms checkboxs qui apres a render du component Task ne sont plus checked alors que cheked 
-//auparavant !
+  const {actualStatus} = useActualStatusContext()
   
   const toggleSubtask = (index: number) => {
     const newSubtaskChecked = [...subtaskChecked];
@@ -54,7 +36,7 @@ function Task(props:taskProps) {
 
     if (newSubtaskChecked[index]) {
       setSubtasksDoneNumber(subtasksDoneNumber + 1);
-      const updatedBoards: Board[] = [...boards];
+      const updatedBoards = [...boards];
       const columnIndex :number = updatedBoards[props.boardIndex]?.columns.findIndex(
         (column) => column.name === actualStatus
       )
@@ -65,7 +47,7 @@ function Task(props:taskProps) {
       setBoards(updatedBoards);
     } else {
       setSubtasksDoneNumber(subtasksDoneNumber - 1);
-      const updatedBoards: Board[] = [...boards];
+      const updatedBoards = [...boards];
       const columnIndex :number = updatedBoards[props.boardIndex]?.columns.findIndex(
         (column) => column.name === actualStatus
       )
@@ -76,8 +58,7 @@ function Task(props:taskProps) {
       setBoards(updatedBoards);
     }
   }
-
-
+  
   return (
     <div className="calc" onClick={() => {
       setTask(false)
@@ -113,8 +94,8 @@ function Task(props:taskProps) {
             toggleSubtask(index)
             }            
             }>
-            <input type="checkbox" name="subtask" checked={subtaskChecked[index]}/>
-            <p>{subtask.name}</p>
+            {subtaskChecked[index] ? <></> : <input type="checkbox" name="subtask" checked={subtaskChecked[index]}/>}
+            <p className={`${subtaskChecked[index] && "subtaskChecked"}`}>{subtask.name}</p>
           </div>
         ))}
       </div>

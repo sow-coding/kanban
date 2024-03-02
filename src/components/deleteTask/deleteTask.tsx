@@ -1,30 +1,26 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { BoardsContext } from '@/context/BoardsContext'
-import { DeleteTaskContext } from '@/context/DeleteTaskContext'
-import { TaskContext } from '@/context/TaskContext';
-import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, {useContext, useState} from 'react'
+import { useBoardsContext } from '@/context/BoardsContext'
+import { useDeleteTaskContext } from '@/context/DeleteTaskContext'
+import { useTaskContext } from '@/context/TaskContext';
+import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import React, { useState} from 'react'
 
 interface deleteTaskProps {
     boardIndex: number;
     taskIndex: number;
 } 
-  interface Board {
-    nameOfTheBoard: string;
-    columns: ColumnType[]
-  }
 
 function DeleteTask(props: deleteTaskProps) {
-    const [deleteTask, setDeleteTask] = useContext(DeleteTaskContext)
-    const [boards, setBoards] = useContext(BoardsContext)
-    const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
-    const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
-    const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
+    const {setDeleteTask} = useDeleteTaskContext()
+    const {boards} = useBoardsContext()
+    const {whichBoard} = useWhichBoardContext()
+    const selectedBoard = boards?.find((board) => board.nameOfTheBoard === whichBoard);
+    const [actualStatus, setActualStatus] = useState<string |undefined>(selectedBoard?.columns[0]?.name)
     const columnIndex :number = boards[props.boardIndex]?.columns.findIndex(
       (column: ColumnType) => column.name === actualStatus
     )
-    const [task, setTask] = useContext(TaskContext)
+   const {setTask} = useTaskContext()
   return (
     <div className="calc" onClick={() => {
         setDeleteTask(false)

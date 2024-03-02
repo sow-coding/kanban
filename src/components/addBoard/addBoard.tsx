@@ -1,17 +1,17 @@
 "use client"
 import { ColumnType } from "@/app/page";
-import { AddBoardContext } from "@/context/AddBoardContext";
-import { BoardsContext } from "@/context/BoardsContext";
-import { WhichBoardContext } from "@/context/WhichBoardContext";
-import { useContext, useState, useRef } from "react"
+import { useAddBoardContext } from "@/context/AddBoardContext";
+import { useBoardsContext } from "@/context/BoardsContext";
+import { useWhichBoardContext } from "@/context/WhichBoardContext";
+import { useState } from "react"
 
 function AddBoard() {
     const [columns, setColumns] = useState<string[]>(["first column"])
-    const [addBoard, setAddBoard] = useContext(AddBoardContext)
-    const [boards, setBoards] = useContext(BoardsContext)
+    const {setAddBoard} = useAddBoardContext()
+    const {boards, setBoards} = useBoardsContext()
     const [nameBoard, setNameBoard] = useState<string>("")
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
-    const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
+    const {setWhichBoard} = useWhichBoardContext()
 
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];

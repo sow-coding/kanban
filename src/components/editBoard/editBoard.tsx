@@ -1,10 +1,9 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { BoardsContext } from '@/context/BoardsContext'
-import { EditBoardContext } from '@/context/EditBoardContext';
-import { NewColumnContext } from '@/context/NewColumnContext';
-import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, { useState, useContext, useEffect } from 'react'
+import { useBoardsContext } from '@/context/BoardsContext'
+import { useEditBoardContext } from '@/context/EditBoardContext';
+import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import React, { useState } from 'react'
 
   interface editBoardPros {
     handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
@@ -12,16 +11,15 @@ import React, { useState, useContext, useEffect } from 'react'
   }
 
 function EditBoard(props: editBoardPros) {
-    const [boards, setBoards] = useContext(BoardsContext)
+    const {boards, setBoards} = useBoardsContext()
     const boardIndex = props.boardIndex
     const editColumn: ColumnType[] = boards[boardIndex]?.columns
-    const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
+    const {whichBoard, setWhichBoard} = useWhichBoardContext()
     const [nameBoard, setNameBoard] = useState<string>(whichBoard)
-    const [editBoard, setEditBoard] = useContext(EditBoardContext)
+    const {setEditBoard} = useEditBoardContext()
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>(editColumn || [])
     const [columns, setColumns] = useState<ColumnType[]>(columnsBoard)
     const [lengthIncreased, setLengthIncreased] = useState(false);
-    const [newColumn, setNewColumn] = useContext(NewColumnContext)
     const deleteColumn = (index: number) => {
         const newColumns = [...columnsBoard];
         newColumns.splice(index, 1);
@@ -66,7 +64,8 @@ function EditBoard(props: editBoardPros) {
                     setColumnsBoard(newColumns);
                     } else if (lengthIncreased === true ) {
                         setColumnsBoard([...columnsBoard, {
-                            name: e.currentTarget.value
+                            name: e.currentTarget.value,
+                            tasks: []
                         }])
                     }
                 }}/>
@@ -83,7 +82,8 @@ function EditBoard(props: editBoardPros) {
                     setLengthIncreased(true);
                 }
                 setColumns([...columns, {
-                    name: ""
+                    name: "",
+                    tasks: []
                 }])
             }}>
                 <p>+ Add New Column</p>

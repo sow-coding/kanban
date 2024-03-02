@@ -1,49 +1,34 @@
 "use client"
-import { BoardsContext } from '@/context/BoardsContext';
-import { EditTaskContext } from '@/context/EditTaskContext'
-import { TaskContext } from '@/context/TaskContext';
-import { WhichBoardContext } from '@/context/WhichBoardContext';
-import React, { useContext, useState } from 'react'
+import { ColumnType, Subtask, TaskType } from '@/app/page';
+import { useBoardsContext } from '@/context/BoardsContext';
+import { useEditTaskContext } from '@/context/EditTaskContext'
+import { useTaskContext } from '@/context/TaskContext';
+import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import React, { useState } from 'react'
+import Task from '../task/task';
 
 interface editTaskProps {
     boardIndex: number;
-    editedTask: Task;
+    editedTask: TaskType;
     taskIndex: number;
 }
-interface Task {
-    title: string;
-    description: string;
-    subtasks?: Subtask[]
-  }
-  interface Board {
-    nameOfTheBoard: string;
-    columns: ColumnType[]
-  }
-  interface ColumnType {
-    name: string;
-    tasks: Task[]
-  }
-  interface Subtask {
-    name?: string;
-  }
-  
 
 function EditTask(props: editTaskProps) {
-    const [editTask, setEditTask] = useContext(EditTaskContext)
-    const [subtasks, setSubtasks] = useState<Subtask[]>(props.editedTask.subtasks ?? [])
-    const [boards, setBoards] = useContext(BoardsContext)
-    const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
-    const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
+    const {setEditTask} = useEditTaskContext()
+    const [subtasks, setSubtasks] = useState(props.editedTask.subtasks ?? [])
+    const {boards, setBoards} = useBoardsContext()
+    const {whichBoard} = useWhichBoardContext()
+    const selectedBoard = boards?.find((board) => board.nameOfTheBoard === whichBoard);
     const [statusOpen, setStatusOpen] = useState<boolean>(false)
-    const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
+    const [actualStatus, setActualStatus] = useState<string |undefined>(selectedBoard?.columns[0]?.name)
     const [titleTask, setTitleTask] = useState<string>(props.editedTask.title)
     const [descriptionTask, setDescriptionTask] = useState<string>(props.editedTask.description)
     const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
-    const [task, setTask] = useContext(TaskContext)
-    const newTask: Task = {
+    const {setTask} = useTaskContext()
+    const newTask: TaskType = {
       title: titleTask,
       description: descriptionTask,
-      subtasks: subtasksArray
+      subtasks: subtasksArray,
     }
     const deleteSubtask = (index: number) => {
       const newSubtask = [...subtasks];
@@ -51,8 +36,8 @@ function EditTask(props: editTaskProps) {
       setSubtasks(newSubtask);
     };
 
-    const saveChanges = (boardIndex: number, editedTask: Task) => {
-      const updatedBoards: Board[] = [...boards];
+    const saveChanges = (boardIndex: number, editedTask: TaskType) => {
+      const updatedBoards = [...boards];
       
       const columnIndex :number = updatedBoards[boardIndex]?.columns.findIndex(
         (column) => column.name === actualStatus
@@ -96,7 +81,8 @@ function EditTask(props: editTaskProps) {
                   <div className="subtaskBoard" key={index}>
                   <input type="text" defaultValue={subtask?.name} placeholder='e.g. Drink coffee & smile' onBlur={(e) => {
                       setSubtasksArray([...subtasksArray, {
-                        name: e.currentTarget.value
+                        name: e.currentTarget.value,
+                        done: false
                       }])
                   }}/>
                   <svg id={`${index}`} onClick={(e) => {
@@ -108,7 +94,10 @@ function EditTask(props: editTaskProps) {
               </div>
             ))}       
           <div className="addNewSubtask" onClick={() => {
-                  setSubtasks([...subtasks, {}])
+                  setSubtasks([...subtasks, {
+                    name: "",
+                    done: false
+                  }])
               }}>
                   <p>+ Add New Subtask</p>
               </div>
@@ -118,7 +107,7 @@ function EditTask(props: editTaskProps) {
           <label htmlFor="status">Status</label>
           <div className="statusAccordion">
               {statusOpen ? <div className='statusList'>
-                {selectedBoard.columns?.map((column: ColumnType, index:number) => (
+                {selectedBoard?.columns?.map((column: ColumnType, index:number) => (
                   <div key={index} className='state' onClick={() => {
                     setActualStatus(column.name)
                     setStatusOpen(false)

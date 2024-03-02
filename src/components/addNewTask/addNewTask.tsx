@@ -1,26 +1,21 @@
 "use client"
 import { ColumnType, Subtask, TaskType } from '@/app/page'
-import { BoardsContext } from '@/context/BoardsContext'
-import { WhichBoardContext } from '@/context/WhichBoardContext'
-import { AddTaskContext } from '@/context/addTaskContext'
-import React, { useContext, useState } from 'react'
-
-interface Board {
-  nameOfTheBoard: string;
-  columns: ColumnType[]
-}
+import {useBoardsContext } from '@/context/BoardsContext'
+import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import { useAddTaskContext } from '@/context/AddTaskContext'
+import React, { useState } from 'react'
 interface addNewTaskProps {
   boardIndex: number;
 }
 
 function AddNewTask(props: addNewTaskProps) {
-  const [addTask, setAddTask] = useContext(AddTaskContext)
+  const {setAddTask} = useAddTaskContext()
   const [subtasks, setSubtasks] = useState<string[]>(["first subtask"])
-  const [boards, setBoards] = useContext(BoardsContext)
-  const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
+  const {boards, setBoards} = useBoardsContext()
+  const {whichBoard} = useWhichBoardContext()
   const [statusOpen, setStatusOpen] = useState<boolean>(false)
-  const selectedBoard: Board = boards?.find((board: Board) => board.nameOfTheBoard === welkeBoard);
-  const [actualStatus, setActualStatus] = useState<string>(selectedBoard?.columns[0]?.name)
+  const selectedBoard = boards?.find((board) => board.nameOfTheBoard === whichBoard);
+  const [actualStatus, setActualStatus] = useState<string | undefined >(selectedBoard?.columns[0]?.name)
   const [titleTask, setTitleTask] = useState<string>("")
   const [descriptionTask, setDescriptionTask] = useState<string>("")
   const [subtasksArray, setSubtasksArray] = useState<Subtask[]>([])
@@ -33,7 +28,7 @@ function AddNewTask(props: addNewTaskProps) {
 
   const handleNewTask = (boardIndex:number, newTask: TaskType) => {
 
-    const updatedBoards: Board[] = [...boards];
+    const updatedBoards = [...boards];
 
     const columnIndex :number = updatedBoards[boardIndex]?.columns.findIndex(
       (column) => column.name === actualStatus
@@ -72,7 +67,8 @@ function AddNewTask(props: addNewTaskProps) {
                 <div className="subtaskBoard" key={index}>
                 <input type="text" placeholder='e.g. Drink coffee & smile' onBlur={(e) => {
                     setSubtasksArray([...subtasksArray, {
-                      name: e.currentTarget.value
+                      name: e.currentTarget.value,
+                      done: false
                     }])
                 }}/>
                 <svg id={`${index}`} onClick={(e) => {
@@ -94,7 +90,7 @@ function AddNewTask(props: addNewTaskProps) {
         <label htmlFor="status">Status</label>
         <div className="statusAccordion">
             {statusOpen ? <div className='statusList'>
-              {selectedBoard.columns?.map((column: ColumnType, index:number) => (
+              {selectedBoard?.columns?.map((column: ColumnType, index:number) => (
                 <div key={index} className='state' onClick={() => {
                   setActualStatus(column.name)
                   setStatusOpen(false)

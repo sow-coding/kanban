@@ -1,37 +1,36 @@
 "use client"
-import { WhichBoardContext } from '@/context/WhichBoardContext'
-import React, { useContext, Dispatch, SetStateAction, useState } from 'react'
+import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import React from 'react'
 import Logo from '../logo/logo'
-import { NavbarContext } from '@/context/NavbarContext'
-import { AddTaskContext } from '@/context/addTaskContext'
-import { EditBoardContext } from '@/context/EditBoardContext'
-import { DeleteBoardContext } from '@/context/DeleteBoardContext'
-import { OptionsContext } from '@/context/OptionsContext'
-import { BoardsContext } from '@/context/BoardsContext'
-import { NewColumnContext } from '@/context/NewColumnContext'
+import { useNavbarContext } from '@/context/NavbarContext'
+import { useAddTaskContext } from '@/context/AddTaskContext'
+import { useEditBoardContext } from '@/context/EditBoardContext'
+import { useDeleteBoardContext } from '@/context/DeleteBoardContext'
+import { useOptionsContext } from '@/context/OptionsContext'
+import { useBoardsContext } from '@/context/BoardsContext'
 
 interface BoardNavbarProps {
   boardIndex: number
 }
 
 function BoardNavbar(props: BoardNavbarProps) {
-    const [welkeBoard, setWelkeBoard] = useContext(WhichBoardContext)
-    const [navbarOff, setNavbarOff] = useContext(NavbarContext)
-    const [addTask, setAddTask] = useContext(AddTaskContext)
-    const [editBoard, setEditBoard] = useContext(EditBoardContext)
-    const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
-    const [options, setOptions] = useContext(OptionsContext)
-    const [boards, setBoards] = useContext(BoardsContext)
-    const [newColumn, setNewColumn] = useContext(NewColumnContext)
-  return (
+    const {whichBoard} = useWhichBoardContext()
+    const {navbarOff} = useNavbarContext()
+    const {setAddTask} = useAddTaskContext()
+    const {setEditBoard} = useEditBoardContext()
+    const {setDeleteBoard} = useDeleteBoardContext()
+    const {options, setOptions} = useOptionsContext()
+    const {boards} = useBoardsContext()
+
+    return (
     <div className='boardNavbar' data-testid="boardNavbar" onClick={(e) => {e.stopPropagation()}}>
         <div className="boardNavbarLeft">
         {navbarOff && <Logo />}
-        <h1>{welkeBoard}</h1>
+        <h1>{whichBoard}</h1>
         </div>
         <div className="navigation">
             <div className={`addNewTask ${(boards.length === 0 || boards[0].columns.length === 0) && "addNewTaskDisable"}`} onClick={() => {
-              welkeBoard !== "" ? setAddTask(true) : alert("Create at least one column to do add a new task !")
+              whichBoard !== "" ? setAddTask(true) : alert("Create at least one column to do add a new task !")
             }}>
                 <p>+<span className='newTaskSpan'> Add New Task</span></p>
             </div>

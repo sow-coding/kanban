@@ -1,24 +1,19 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import Logo from '../logo/logo'
-import { ThemeContext } from '@/context/ThemeContext'
 import Switch from '@mui/material/Switch';
 import BoardStick from '../boardStick/boardStick';
-import { BoardsContext } from '@/context/BoardsContext';
-import { AddBoardContext } from '@/context/AddBoardContext';
-import { NavbarContext } from '@/context/NavbarContext';
+import { useBoardsContext } from '@/context/BoardsContext';
+import { useAddBoardContext } from '@/context/AddBoardContext';
+import { useNavbarContext } from '@/context/NavbarContext';
+import { useThemeContext } from '@/context/ThemeContext';
 
 function Navbar() {
-
-  const [theme, setTheme] = useContext(ThemeContext)
+  const {theme, setTheme} = useThemeContext()
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
-  const [navbarOff, setNavbarOff] = useContext(NavbarContext)
-  const [boards, setBoards] = useContext(BoardsContext);
-  const [addBoard, setAddBoard] = useContext(AddBoardContext)
-
-  const addNewBoard = () => {
-    setBoards((prevBoards: any) => [...(prevBoards || []), "board"]);
-  }
+  const {navbarOff, setNavbarOff} = useNavbarContext()
+  const {boards} = useBoardsContext()
+  const {setAddBoard} = useAddBoardContext()
 
   return (
     <div className={`navbar ${navbarOff && "noPadding noWidth20"}`} data-testid="navbar">
@@ -35,7 +30,7 @@ function Navbar() {
           <Logo />
             <div className="navbarMenuBoard">
             <p className='allBoard'>ALL BOARDS ({boards?.length})</p>
-            {boards?.map((board:any, index:number) => (
+            {boards?.map((board, index:number) => (
               <BoardStick key={index} boardName={boards[index].nameOfTheBoard}/>
             ))}
             </div>
@@ -51,7 +46,7 @@ function Navbar() {
         <div className="navbarBottom">
           <div className="appMode">
             <Switch data-testid="changeModeBtn" {...label} onClick={() => {
-              setTheme(!theme)
+              theme === "dark" ? setTheme("light") : setTheme("dark")
             }} />
           </div>
           <div className="hideSidebar" onClick={() => {

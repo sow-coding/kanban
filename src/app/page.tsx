@@ -1,33 +1,36 @@
 "use client"
 import Navbar from "@/components/navbar/navbar";
-import { BoardsContext } from "@/context/BoardsContext";
-import { ThemeContext } from "@/context/ThemeContext";
-import { useState } from "react";
+import { useBoardsContext } from "@/context/BoardsContext";
+import React, { useState } from "react";
 import AddBoard from '@/components/addBoard/addBoard'
-import { AddBoardContext } from "@/context/AddBoardContext";
-import { WhichBoardContext } from "@/context/WhichBoardContext";
+import { useAddBoardContext } from "@/context/AddBoardContext";
+import { useWhichBoardContext } from "@/context/WhichBoardContext";
 import BoardNavbar from "@/components/boardNavbar/boardNavbar";
-import { NavbarContext } from "@/context/NavbarContext";
 import AddColumn from "@/components/addColumn/addColumn";
-import { AddColumnContext } from "@/context/AddColumnContext";
+import { useAddColumnContext } from "@/context/AddColumnContext";
 import AddNewTask from "@/components/addNewTask/addNewTask";
-import { AddTaskContext } from "@/context/addTaskContext";
+import { useAddTaskContext } from "@/context/AddTaskContext";
 import EditBoard from "@/components/editBoard/editBoard";
-import { EditBoardContext } from "@/context/EditBoardContext";
+import { useEditBoardContext } from "@/context/EditBoardContext";
 import EditTask from "@/components/editTask/editTask";
-import { EditTaskContext } from "@/context/EditTaskContext";
+import { useEditTaskContext } from "@/context/EditTaskContext";
 import DeleteBoard from "@/components/deleteBoard/deleteBoard";
-import { DeleteBoardContext } from "@/context/DeleteBoardContext";
-import { OptionsContext } from "@/context/OptionsContext";
+import { useDeleteBoardContext } from "@/context/DeleteBoardContext";
+import { useOptionsContext } from "@/context/OptionsContext";
 import DeleteTask from "@/components/deleteTask/deleteTask";
-import { DeleteTaskContext } from "@/context/DeleteTaskContext";
-import { NewColumnContext } from "@/context/NewColumnContext";
-import { TaskContext } from "@/context/TaskContext";
+import { useDeleteTaskContext } from "@/context/DeleteTaskContext";
+import { useNewColumnContext } from "@/context/NewColumnContext";
+import { useTaskContext } from "@/context/TaskContext";
 import Task from "@/components/task/task";
-import { ActualStatusContext } from "@/context/ActualStatusContext";
+import { useActualStatusContext } from "@/context/ActualStatusContext";
+import { useThemeContext } from "@/context/ThemeContext";
 
+export interface UseContextHook {
+  children: React.ReactNode
+}
 export interface Subtask {
   name: string;
+  done: boolean
 }
 export interface TaskType {
   title: string;
@@ -37,78 +40,55 @@ export interface TaskType {
 }
 export interface ColumnType {
   name: string;
-  tasks?: TaskType[]
+  tasks: TaskType[]
 }
 export interface Board {
   nameOfTheBoard: string;
-  columns?: ColumnType[]
+  columns: ColumnType[]
 }
 
 export default function Board() {
-
-  //refaire context
-  //enlever bug column color avec getRandomColor
   //rajouter logo version tel + menu calc + barrer task when done + reduire taille btn addNewTask
-  //enlever zoom iphone
-
-  const [boards, setBoards] = useState<Board[]>([])
-  const [theme, setTheme] = useState<boolean>(false)
-  const [addBoard, setAddBoard] = useState<boolean>(false)
-  const [navbarOff, setNavbarOff] = useState<boolean>(false)
-  const [addColumn, setAddColumn] = useState<boolean>(false)
-  const [addTask, setAddtask] = useState<boolean>(false)
-  const [editBoard, setEditBoard] = useState<boolean>(false)
-  const [editTask, setEditTask] = useState<boolean>(false)
-  const [whichBoard, setWhichBoard] = useState<string>("")
-  const [editedTask, setEditedTask] = useState<Task>({
+  //enlever bug column color avec getRandomColor
+  const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
+    const updatedBoards: Board[] = [...boards];
+    updatedBoards[boardIndex]?.columns?.push(...newColumns);
+    setBoards(updatedBoards);
+  };
+  const {addBoard, setAddBoard} = useAddBoardContext()
+  const {setActualStatus} = useActualStatusContext()
+  const {addColumn, setAddColumn} = useAddColumnContext()
+  const {addTask} = useAddTaskContext()
+  const {deleteBoard} = useDeleteBoardContext()
+  const {boards, setBoards} = useBoardsContext()
+  const {deleteTask} = useDeleteTaskContext()
+  const {editBoard} = useEditBoardContext()
+  const {editTask} = useEditTaskContext()
+  const {options, setOptions} = useOptionsContext()
+  const {newColumn} = useNewColumnContext()
+  const {task, setTask} = useTaskContext()
+  const {theme} = useThemeContext()
+  const {whichBoard} = useWhichBoardContext()
+  const [editedTask, setEditedTask] = useState<TaskType>({
     title: "",
     description: "",
     subtasks: []
   })
-  const [deleteBoard, setDeleteBoard] = useState<boolean>(false)
-  const handleNewColumn = (boardIndex:number, newColumns: ColumnType[]) => {
-
-    const updatedBoards: Board[] = [...boards];
-
-    updatedBoards[boardIndex]?.columns?.push(...newColumns);
-
-    setBoards(updatedBoards);
-  };
-
   const boardIndex = boards.findIndex(board => board.nameOfTheBoard === whichBoard);
   const [taskIndex, setTaskIndex] = useState<number>(0)
-  const [options, setOptions] = useState<boolean>(false)
-  const [deleteTask, setDeleteTask] = useState<boolean>(false)
-  const [newColumn, setNewColumn] = useState<boolean>(false)
-  const [task, setTask] = useState<boolean>(false)
   const [taskDisplay, setTaskDisplay] = useState({
     title: "",
-    description: ""
+    description: "",
   })
+
   const getRandomColor = () => {
     const colors = ["#49C4E5", "#8471F2", "#67E2AE", "#EA5555"];
     return colors[Math.floor(Math.random() * colors.length)];
-  };
-  const [actualStatus, setActualStatus] = useState("")
+  }
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
-    <BoardsContext.Provider value={[boards, setBoards]}>
-    <AddBoardContext.Provider value={[addBoard, setAddBoard]}>
-    <WhichBoardContext.Provider value={[whichBoard, setWhichBoard]}>
-    <NavbarContext.Provider value={[navbarOff, setNavbarOff]}>
-    <AddColumnContext.Provider value={[addColumn, setAddColumn]}>
-    <AddTaskContext.Provider value={[addTask, setAddtask]}>
-    <EditBoardContext.Provider value={[editBoard, setEditBoard]}>
-    <EditTaskContext.Provider value={[editTask, setEditTask]}>
-    <DeleteBoardContext.Provider value={[deleteBoard, setDeleteBoard]}>
-    <OptionsContext.Provider value={[options, setOptions]}>
-    <DeleteTaskContext.Provider value={[deleteTask, setDeleteTask]}>
-    <NewColumnContext.Provider value={[newColumn, setNewColumn]}>
-    <TaskContext.Provider value={[task, setTask]}>
-    <ActualStatusContext.Provider value={[actualStatus, setActualStatus]}>
-    {/*<div data-testid="board" className="board" data-theme={
-      theme ? "dark" : "light"
+    <div data-testid="board" className="board" data-theme={
+      theme === "dark" ? "dark" : "light"
     }>
       <Navbar />
       <div className="kanbanApp" onClick={() => {setOptions(false)}}>
@@ -161,22 +141,6 @@ export default function Board() {
       {editTask && <EditTask boardIndex={boardIndex} editedTask={editedTask} taskIndex={taskIndex}/>}
       {deleteBoard && <DeleteBoard boardIndex={boardIndex}/>}
       {deleteTask && <DeleteTask taskIndex={taskIndex} boardIndex={boardIndex} />}
-      </div>*/}
-    {<h1>Kanban coming soon we are updating that</h1>}
-    </ActualStatusContext.Provider>
-    </TaskContext.Provider>
-    </NewColumnContext.Provider>
-    </DeleteTaskContext.Provider>
-    </OptionsContext.Provider>
-    </DeleteBoardContext.Provider>
-    </EditTaskContext.Provider>
-    </EditBoardContext.Provider>
-    </AddTaskContext.Provider>
-    </AddColumnContext.Provider>
-    </NavbarContext.Provider>
-    </WhichBoardContext.Provider>
-    </AddBoardContext.Provider>
-    </BoardsContext.Provider>
-    </ThemeContext.Provider>
+      </div>
   )
 }

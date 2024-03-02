@@ -1,18 +1,18 @@
-import { BoardsContext } from '@/context/BoardsContext'
-import { DeleteBoardContext } from '@/context/DeleteBoardContext'
-import { OptionsContext } from '@/context/OptionsContext'
-import { WhichBoardContext } from '@/context/WhichBoardContext'
-import React, { useContext } from 'react'
+import { useBoardsContext } from '@/context/BoardsContext'
+import { useDeleteBoardContext } from '@/context/DeleteBoardContext'
+import { useOptionsContext } from '@/context/OptionsContext'
+import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import React from 'react'
 
 interface deleteBoardProp {
     boardIndex: number
 }
 
 function DeleteBoard(props: deleteBoardProp) {
-    const [deleteBoard, setDeleteBoard] = useContext(DeleteBoardContext)
-    const [whichBoard, setWhichBoard] = useContext(WhichBoardContext)
-    const [options, setOptions] = useContext(OptionsContext)
-    const [boards, setBoards] = useContext(BoardsContext)
+    const {setDeleteBoard} = useDeleteBoardContext()
+    const {whichBoard, setWhichBoard} = useWhichBoardContext()
+    const {setOptions} = useOptionsContext()
+    const {boards, setBoards} = useBoardsContext()
     
     const nextBoard = () => {
         if (props.boardIndex > 0) {

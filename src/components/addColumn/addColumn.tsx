@@ -1,26 +1,25 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { AddColumnContext } from '@/context/AddColumnContext'
-import { BoardsContext } from '@/context/BoardsContext';
-import { NewColumnContext } from '@/context/NewColumnContext';
-import React, {useContext, useState} from 'react'
+import { useAddColumnContext } from '@/context/AddColumnContext'
+import { useBoardsContext } from '@/context/BoardsContext';
+import { useNewColumnContext } from '@/context/NewColumnContext';
+import React, {useState} from 'react'
 interface addColumnProps {
     boardIndex: number;
     handleNewColumn: (boardIndex: number, newColumns: ColumnType[]) => void;
 }
 
 function AddColumn(props: addColumnProps) {
-    const [addColumn, setAddColumn] = useContext(AddColumnContext)
+    const {setAddColumn} = useAddColumnContext()
     const [columns, setColumns] = useState<string[]>(["first column"])
     const [columnsBoard, setColumnsBoard] = useState<ColumnType[]>([])
-    const [boards, setBoards] = useContext(BoardsContext)
+    const {boards} = useBoardsContext()
     const deleteColumn = (index: number) => {
         const newColumns = [...columns];
         newColumns.splice(index, 1);
         setColumns(newColumns);
     };
-    const [newColumn, setNewColumn] = useContext(NewColumnContext)
-
+    const {setNewColumn} = useNewColumnContext()
     return (
     <div className='calc' onClick={() => {
         setAddColumn(false)
