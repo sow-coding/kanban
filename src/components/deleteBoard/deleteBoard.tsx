@@ -1,7 +1,7 @@
-import { useBoardsContext } from '@/context/BoardsContext'
-import { useDeleteBoardContext } from '@/context/DeleteBoardContext'
-import { useOptionsContext } from '@/context/OptionsContext'
-import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import { useBoardsContext } from '@/contexts/BoardsContext'
+import { useDeleteBoardContext } from '@/contexts/DeleteBoardContext'
+import { useOptionsContext } from '@/contexts/OptionsContext'
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext'
 import React from 'react'
 
 interface deleteBoardProp {

@@ -1,8 +1,8 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { useAddColumnContext } from '@/context/AddColumnContext'
-import { useBoardsContext } from '@/context/BoardsContext';
-import { useNewColumnContext } from '@/context/NewColumnContext';
+import { useAddColumnContext } from '@/contexts/AddColumnContext'
+import { useBoardsContext } from '@/contexts/BoardsContext';
+import { useNewColumnContext } from '@/contexts/NewColumnContext';
 import React, {useState} from 'react'
 interface addColumnProps {
     boardIndex: number;

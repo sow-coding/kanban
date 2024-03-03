@@ -1,8 +1,8 @@
 "use client"
 import { ColumnType, Subtask, TaskType } from '@/app/page'
-import {useBoardsContext } from '@/context/BoardsContext'
-import { useWhichBoardContext } from '@/context/WhichBoardContext'
-import { useAddTaskContext } from '@/context/AddTaskContext'
+import {useBoardsContext } from '@/contexts/BoardsContext'
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext'
+import { useAddTaskContext } from '@/contexts/AddTaskContext'
 import React, { useState } from 'react'
 interface addNewTaskProps {
   boardIndex: number;

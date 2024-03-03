@@ -1,13 +1,13 @@
 "use client"
-import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext'
 import React from 'react'
 import Logo from '../logo/logo'
-import { useNavbarContext } from '@/context/NavbarContext'
-import { useAddTaskContext } from '@/context/AddTaskContext'
-import { useEditBoardContext } from '@/context/EditBoardContext'
-import { useDeleteBoardContext } from '@/context/DeleteBoardContext'
-import { useOptionsContext } from '@/context/OptionsContext'
-import { useBoardsContext } from '@/context/BoardsContext'
+import { useNavbarContext } from '@/contexts/NavbarContext'
+import { useAddTaskContext } from '@/contexts/AddTaskContext'
+import { useEditBoardContext } from '@/contexts/EditBoardContext'
+import { useDeleteBoardContext } from '@/contexts/DeleteBoardContext'
+import { useOptionsContext } from '@/contexts/OptionsContext'
+import { useBoardsContext } from '@/contexts/BoardsContext'
 
 interface BoardNavbarProps {
   boardIndex: number

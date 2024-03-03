@@ -1,5 +1,5 @@
 "use client"
-import { useWhichBoardContext } from '@/context/WhichBoardContext'
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext'
 import React from 'react'
 
 type boardStickProps = {

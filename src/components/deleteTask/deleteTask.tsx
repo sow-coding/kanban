@@ -1,9 +1,9 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { useBoardsContext } from '@/context/BoardsContext'
-import { useDeleteTaskContext } from '@/context/DeleteTaskContext'
-import { useTaskContext } from '@/context/TaskContext';
-import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import { useBoardsContext } from '@/contexts/BoardsContext'
+import { useDeleteTaskContext } from '@/contexts/DeleteTaskContext'
+import { useTaskContext } from '@/contexts/TaskContext';
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext';
 import React, { useState} from 'react'
 
 interface deleteTaskProps {

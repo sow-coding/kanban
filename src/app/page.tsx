@@ -1,30 +1,30 @@
 "use client"
 import Navbar from "@/components/navbar/navbar";
-import { useBoardsContext } from "@/context/BoardsContext";
+import { useBoardsContext } from "@/contexts/BoardsContext";
 import React, { useState } from "react";
 import AddBoard from '@/components/addBoard/addBoard'
-import { useAddBoardContext } from "@/context/AddBoardContext";
-import { useWhichBoardContext } from "@/context/WhichBoardContext";
+import { useAddBoardContext } from "@/contexts/AddBoardContext";
+import { useWhichBoardContext } from "@/contexts/WhichBoardContext";
 import BoardNavbar from "@/components/boardNavbar/boardNavbar";
 import AddColumn from "@/components/addColumn/addColumn";
-import { useAddColumnContext } from "@/context/AddColumnContext";
+import { useAddColumnContext } from "@/contexts/AddColumnContext";
 import AddNewTask from "@/components/addNewTask/addNewTask";
 import EditBoard from "@/components/editBoard/editBoard";
-import { useEditBoardContext } from "@/context/EditBoardContext";
+import { useEditBoardContext } from "@/contexts/EditBoardContext";
 import EditTask from "@/components/editTask/editTask";
-import { useEditTaskContext } from "@/context/EditTaskContext";
+import { useEditTaskContext } from "@/contexts/EditTaskContext";
 import DeleteBoard from "@/components/deleteBoard/deleteBoard";
-import { useDeleteBoardContext } from "@/context/DeleteBoardContext";
-import { useOptionsContext } from "@/context/OptionsContext";
+import { useDeleteBoardContext } from "@/contexts/DeleteBoardContext";
+import { useOptionsContext } from "@/contexts/OptionsContext";
 import DeleteTask from "@/components/deleteTask/deleteTask";
-import { useDeleteTaskContext } from "@/context/DeleteTaskContext";
-import { useNewColumnContext } from "@/context/NewColumnContext";
-import { useTaskContext } from "@/context/TaskContext";
+import { useDeleteTaskContext } from "@/contexts/DeleteTaskContext";
+import { useNewColumnContext } from "@/contexts/NewColumnContext";
+import { useTaskContext } from "@/contexts/TaskContext";
 import Task from "@/components/task/task";
-import { useActualStatusContext } from "@/context/ActualStatusContext";
-import { useThemeContext } from "@/context/ThemeContext";
-import { usePhoneNavbarContext } from "@/context/PhoneNavbarContext";
-import { useAddTaskContext } from "@/context/AddTaskContext";
+import { useActualStatusContext } from "@/contexts/ActualStatusContext";
+import { useThemeContext } from "@/contexts/ThemeContext";
+import { usePhoneNavbarContext } from "@/contexts/PhoneNavbarContext";
+import { useAddTaskContext } from "@/contexts/AddTaskContext";
 
 export interface UseContextHook {
   children: React.ReactNode

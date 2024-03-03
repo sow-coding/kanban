@@ -1,10 +1,10 @@
 "use client"
 import { Subtask, TaskType } from '@/app/page';
-import { useActualStatusContext } from '@/context/ActualStatusContext';
-import { useBoardsContext } from '@/context/BoardsContext';
-import { useDeleteTaskContext } from '@/context/DeleteTaskContext';
-import { useEditTaskContext } from '@/context/EditTaskContext';
-import { useTaskContext } from '@/context/TaskContext';
+import { useActualStatusContext } from '@/contexts/ActualStatusContext';
+import { useBoardsContext } from '@/contexts/BoardsContext';
+import { useDeleteTaskContext } from '@/contexts/DeleteTaskContext';
+import { useEditTaskContext } from '@/contexts/EditTaskContext';
+import { useTaskContext } from '@/contexts/TaskContext';
 import React, { useState } from 'react'
 
 interface TaskCompletedType {

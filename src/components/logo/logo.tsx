@@ -1,5 +1,5 @@
 "use client"
-import { useThemeContext } from '@/context/ThemeContext'
+import { useThemeContext } from '@/contexts/ThemeContext'
 import React from 'react'
 
 function Logo() {

@@ -3,11 +3,11 @@ import React from 'react'
 import Logo from '../logo/logo'
 import Switch from '@mui/material/Switch';
 import BoardStick from '../boardStick/boardStick';
-import { useBoardsContext } from '@/context/BoardsContext';
-import { useAddBoardContext } from '@/context/AddBoardContext';
-import { useNavbarContext } from '@/context/NavbarContext';
-import { useThemeContext } from '@/context/ThemeContext';
-import { usePhoneNavbarContext } from '@/context/PhoneNavbarContext';
+import { useBoardsContext } from '@/contexts/BoardsContext';
+import { useAddBoardContext } from '@/contexts/AddBoardContext';
+import { useNavbarContext } from '@/contexts/NavbarContext';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { usePhoneNavbarContext } from '@/contexts/PhoneNavbarContext';
 
 function Navbar() {
   const {theme, setTheme} = useThemeContext()

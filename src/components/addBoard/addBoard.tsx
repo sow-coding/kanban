@@ -1,8 +1,8 @@
 "use client"
 import { ColumnType } from "@/app/page";
-import { useAddBoardContext } from "@/context/AddBoardContext";
-import { useBoardsContext } from "@/context/BoardsContext";
-import { useWhichBoardContext } from "@/context/WhichBoardContext";
+import { useAddBoardContext } from "@/contexts/AddBoardContext";
+import { useBoardsContext } from "@/contexts/BoardsContext";
+import { useWhichBoardContext } from "@/contexts/WhichBoardContext";
 import { useState } from "react"
 
 function AddBoard() {

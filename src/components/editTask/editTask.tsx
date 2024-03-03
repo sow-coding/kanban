@@ -1,9 +1,9 @@
 "use client"
 import { ColumnType, Subtask, TaskType } from '@/app/page';
-import { useBoardsContext } from '@/context/BoardsContext';
-import { useEditTaskContext } from '@/context/EditTaskContext'
-import { useTaskContext } from '@/context/TaskContext';
-import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import { useBoardsContext } from '@/contexts/BoardsContext';
+import { useEditTaskContext } from '@/contexts/EditTaskContext'
+import { useTaskContext } from '@/contexts/TaskContext';
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext';
 import React, { useState } from 'react'
 import Task from '../task/task';
 

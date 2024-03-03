@@ -1,8 +1,8 @@
 "use client"
 import { ColumnType } from '@/app/page';
-import { useBoardsContext } from '@/context/BoardsContext'
-import { useEditBoardContext } from '@/context/EditBoardContext';
-import { useWhichBoardContext } from '@/context/WhichBoardContext';
+import { useBoardsContext } from '@/contexts/BoardsContext'
+import { useEditBoardContext } from '@/contexts/EditBoardContext';
+import { useWhichBoardContext } from '@/contexts/WhichBoardContext';
 import React, { useState } from 'react'
 
   interface editBoardPros {
