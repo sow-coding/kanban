@@ -34,7 +34,6 @@ export default function RootLayout({
     <ActualStatusContextProvider>
     <AddBoardContextProvider>
     <AddColumnContextProvider>
-    <AddTaskContextProvider>
     <BoardsContextProvider>
     <DeleteBoardContextProvider>
     <DeleteTaskContextProvider>
@@ -47,12 +46,14 @@ export default function RootLayout({
     <ThemeContextProvider>
     <WhichBoardContextProvider>
     <PhoneNavbarContextProvider>
+    <AddTaskContextProvider>
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className={kanbanFont.className}>{children}</body>
     </html>
+    </AddTaskContextProvider>
     </PhoneNavbarContextProvider>
     </WhichBoardContextProvider>
     </ThemeContextProvider>
@@ -65,7 +66,6 @@ export default function RootLayout({
     </DeleteTaskContextProvider>
     </DeleteBoardContextProvider>
     </BoardsContextProvider>
-    </AddTaskContextProvider>
     </AddColumnContextProvider>
     </AddBoardContextProvider>
     </ActualStatusContextProvider>

@@ -9,7 +9,6 @@ import BoardNavbar from "@/components/boardNavbar/boardNavbar";
 import AddColumn from "@/components/addColumn/addColumn";
 import { useAddColumnContext } from "@/context/AddColumnContext";
 import AddNewTask from "@/components/addNewTask/addNewTask";
-import { useAddTaskContext } from "@/context/AddTaskContext";
 import EditBoard from "@/components/editBoard/editBoard";
 import { useEditBoardContext } from "@/context/EditBoardContext";
 import EditTask from "@/components/editTask/editTask";
@@ -25,6 +24,7 @@ import Task from "@/components/task/task";
 import { useActualStatusContext } from "@/context/ActualStatusContext";
 import { useThemeContext } from "@/context/ThemeContext";
 import { usePhoneNavbarContext } from "@/context/PhoneNavbarContext";
+import { useAddTaskContext } from "@/context/AddTaskContext";
 
 export interface UseContextHook {
   children: React.ReactNode
