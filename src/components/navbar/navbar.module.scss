@@ -97,6 +97,9 @@
             cursor: pointer;
         }
     }
+    .eye2 {
+        display: none;
+    }
 }
 
 @media (max-width: 1800px) {
@@ -163,5 +166,24 @@
 @media (max-width: 599px) {
     .navbar {
         display: none;
+    }
+    [data-phonenavbar=true] {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--bg-color);
+        & .eye2 {
+            display: block;
+            align-self: start;
+        }
+        & .boardStick {
+            border-radius: 100px!important;
+        }
+        & .hideSidebar {
+            display: none!important;
+        }
     }
 }

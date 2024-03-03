@@ -16,6 +16,7 @@ import OptionsContextProvider from '@/context/OptionsContext'
 import TaskContextProvider from '@/context/TaskContext'
 import ThemeContextProvider from '@/context/ThemeContext'
 import WhichBoardContextProvider from '@/context/WhichBoardContext'
+import PhoneNavbarContextProvider from '@/context/PhoneNavbarContext'
 
 const kanbanFont = Plus_Jakarta_Sans ({ subsets: ['latin'] })
 
@@ -45,12 +46,14 @@ export default function RootLayout({
     <TaskContextProvider>
     <ThemeContextProvider>
     <WhichBoardContextProvider>
+    <PhoneNavbarContextProvider>
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className={kanbanFont.className}>{children}</body>
     </html>
+    </PhoneNavbarContextProvider>
     </WhichBoardContextProvider>
     </ThemeContextProvider>
     </TaskContextProvider>

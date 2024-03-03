@@ -33,7 +33,7 @@ function Task(props:taskProps) {
     const newSubtaskChecked = [...subtaskChecked];
     newSubtaskChecked[index] = !newSubtaskChecked[index];
     setSubtaskChecked(newSubtaskChecked);
-
+    
     if (newSubtaskChecked[index]) {
       setSubtasksDoneNumber(subtasksDoneNumber + 1);
       const updatedBoards = [...boards];

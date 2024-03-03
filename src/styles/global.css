@@ -41,6 +41,18 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+body .eye2 {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 80vh;
+}
+body .eye2:hover {
+  cursor: pointer;
+}
+body .phoneNavbarDisplayed {
+  display: none !important;
+}
 body .board {
   width: 100%;
   height: 100vh;
@@ -208,34 +220,6 @@ body .board .kanbanApp .columns .newColumn h2 {
 body .board .kanbanApp .columns .newColumnNone {
   display: none !important;
 }
-@keyframes shake {
-  0%, 100% {
-    transform: translate(-50%, -50%) translateX(0);
-  }
-  25%, 75% {
-    transform: translate(-50%, -50%) translateX(-5px);
-  }
-  50% {
-    transform: translate(-50%, -50%) translateX(5px);
-  }
-}
-@keyframes colorChange {
-  0% {
-    color: red;
-  }
-  25% {
-    color: blue;
-  }
-  50% {
-    color: green;
-  }
-  75% {
-    color: #635FC7;
-  }
-  100% {
-    color: red;
-  }
-}
 body .clickBoard {
   position: fixed;
   top: 50%;
@@ -252,5 +236,10 @@ body .clickBoard h1 {
 @media (max-width: 700px) {
   .newColumn {
     display: none !important;
+  }
+}
+@media (max-width: 599px) {
+  body .eye2 {
+    display: block;
   }
 }/*# sourceMappingURL=global.css.map */
