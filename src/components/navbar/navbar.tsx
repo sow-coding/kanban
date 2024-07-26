@@ -47,7 +47,7 @@ function Navbar() {
         </div>
         <div className="navbarBottom">
           <div className="appMode">
-            <Switch data-testid="changeModeBtn" {...label} onClick={() => {
+            <Switch data-testid="changeModeBouton" {...label} onClick={() => {
               theme === "dark" ? setTheme("light") : setTheme("dark")
             }} />
           </div>
